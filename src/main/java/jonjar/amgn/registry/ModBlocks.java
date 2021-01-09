@@ -24,11 +24,19 @@ public class ModBlocks {
             //luminance()
     );
 
+    public static final Block COMPRESSED_SLIME_BLOCK = new Block(FabricBlockSettings
+        .of(Material.ORGANIC_PRODUCT)
+        .breakByTool(FabricToolTags.PICKAXES, 0)
+        .strength(0.75f, 8.0f)
+        .sounds(BlockSoundGroup.SLIME)
+    );
+
 
     /*
     블럭 등록
      */
-    public  static void registerBlocks(){
+    public static void registerBlocks(){
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
     }
 }
