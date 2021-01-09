@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "amgn",
+  "version": "${version}",
+  "name": "Amgn",
+  "description": "",
+  "authors": [
+    "Team_JonJAr"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/amgn/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "jonjar.amgn.client.AmgnClient"
+    ],
+    "main": [
+      "jonjar.amgn.Amgn"
+    ]
+  },
+  "mixins": [
+    "amgn.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}
