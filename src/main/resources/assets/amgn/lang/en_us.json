@@ -1,6 +1,6 @@
 {
   "item.amgn.chocolate_ingot" : "Chocolate Ingot",
-  "item.amgn.chocolate_block" : "Chocolate Block",
+  "block.amgn.chocolate_block" : "Chocolate Block",
 
   "itemGroup.amgn.general" : "AMGN"
 }

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "amgn:blocks/chocolate_block"
+    "all": "amgn:block/chocolate_block"
   }
 }
