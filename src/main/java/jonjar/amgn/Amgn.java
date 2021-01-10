@@ -1,6 +1,7 @@
 package jonjar.amgn;
 
 import jonjar.amgn.registry.ModBlocks;
+import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -23,6 +24,6 @@ public class Amgn implements ModInitializer {
 
         ModItems.registerItems();//아이템 등록
         ModBlocks.registerBlocks();//블럭 등록
-
+        ModFluids.registryFluids();//액체 등록
     }
 }
