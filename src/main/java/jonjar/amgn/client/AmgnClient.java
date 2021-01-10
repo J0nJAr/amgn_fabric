@@ -28,14 +28,14 @@ import net.minecraft.world.BlockRenderView;
 import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
-public class FluidRenderer implements ClientModInitializer {
+public class AmgnClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient()
     {
         // ...
         setupFluidRendering(ModFluids.STILL_SLIME, ModFluids.FLOWING_SLIME, new Identifier("minecraft", "water"), 0xABF200);
-        setupFluidRendering(ModFluids.STILL_MOLTEN_CHOCOLATE, ModFluids.FLOWING_CHOCOLATE, new Identifier("minecraft", "water"), 0x4CC248);
+        setupFluidRendering(ModFluids.STILL_MOLTEN_CHOCOLATE, ModFluids.FLOWING_CHOCOLATE, new Identifier("minecraft", "water"), 0x430000);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_SLIME, ModFluids.FLOWING_SLIME);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_MOLTEN_CHOCOLATE, ModFluids.FLOWING_CHOCOLATE);
         // ...

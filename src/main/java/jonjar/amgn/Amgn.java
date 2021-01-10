@@ -22,8 +22,9 @@ public class Amgn implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        ModItems.registerItems();//아이템 등록
-        ModBlocks.registerBlocks();//블럭 등록
+
         ModFluids.registryFluids();//액체 등록
+        ModBlocks.registerBlocks();//블럭 등록
+        ModItems.registerItems();//아이템 등록
     }
 }

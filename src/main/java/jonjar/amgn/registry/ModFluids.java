@@ -26,12 +26,12 @@ public class ModFluids {
 
     public static void registryFluids()
     {
-        STILL_SLIME = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "still_slime"), new SlimeFluid.Still());
+        STILL_SLIME = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "molten_slime"), new SlimeFluid.Still());
         FLOWING_SLIME = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_slime"), new SlimeFluid.Flowing());
 
-        STILL_MOLTEN_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "acid"), new ChocolateFluid.Still());
-       FLOWING_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_acid"), new ChocolateFluid.Flowing());
-       CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "acid_bucket"), new BucketItem(STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
+        STILL_MOLTEN_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "molten_chocolate"), new ChocolateFluid.Still());
+       FLOWING_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_chocolate"), new ChocolateFluid.Flowing());
+       CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "chocolate_bucket"), new BucketItem(STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
 
     }
 

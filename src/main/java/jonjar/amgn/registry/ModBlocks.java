@@ -42,7 +42,8 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
 
-        MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "acid"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});
         MOLTEN_SLIME = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_slime"), new FluidBlock(ModFluids.STILL_SLIME, FabricBlockSettings.copy(Blocks.WATER)){});
+        MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_chocolate"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});
+
     }
 }
