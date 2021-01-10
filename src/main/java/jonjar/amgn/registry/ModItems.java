@@ -19,6 +19,7 @@ public class ModItems {
 
     // 양동이
     public static BucketItem SLIME_BUCKET;
+    public static Item  CHOCOLATE_BUCKET;
 
     //블럭아이템
     public static final BlockItem CHOCOLATE_BLOCK = new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
@@ -34,6 +35,7 @@ public class ModItems {
         Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), SLIME_INGOT);
         Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
 
+        CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "chocolate_bucket"), new BucketItem(ModFluids.STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
         SLIME_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "slime_bucket"), new BucketItem(ModFluids.STILL_SLIME, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
     }
 }

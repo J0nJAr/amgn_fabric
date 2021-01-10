@@ -21,7 +21,7 @@ public class ModFluids {
     public static FlowableFluid STILL_SLIME;
     public static FlowableFluid FLOWING_SLIME;
 
-    public static Item  CHOCOLATE_BUCKET;
+
 
 
     public static void registryFluids()
@@ -31,7 +31,7 @@ public class ModFluids {
 
         STILL_MOLTEN_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "molten_chocolate"), new ChocolateFluid.Still());
        FLOWING_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_chocolate"), new ChocolateFluid.Flowing());
-       CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "chocolate_bucket"), new BucketItem(STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
+
 
     }
 

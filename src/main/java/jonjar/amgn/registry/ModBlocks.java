@@ -25,10 +25,10 @@ public class ModBlocks {
     );
 
     public static final Block COMPRESSED_SLIME_BLOCK = new SlimeBlock(FabricBlockSettings
-        .of(Material.ORGANIC_PRODUCT)
-        .breakByTool(FabricToolTags.PICKAXES, 0)
-        .strength(0.75f, 8.0f)
-        .sounds(BlockSoundGroup.SLIME)
+            .of(Material.ORGANIC_PRODUCT)
+            .breakByTool(FabricToolTags.PICKAXES, 0)
+            .strength(0.75f, 8.0f)
+            .sounds(BlockSoundGroup.SLIME)
             .nonOpaque()
             .slipperiness(0.6f)
     );
