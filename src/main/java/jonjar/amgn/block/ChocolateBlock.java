@@ -6,7 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
@@ -33,6 +38,15 @@ public class ChocolateBlock extends Block {
             world.setBlockState(pos, ModBlocks.MOLTEN_CHOCOLATE.getDefaultState());
             world.updateNeighbor(pos, ModBlocks.MOLTEN_CHOCOLATE, pos);
         }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient) {
+            player.sendMessage(new LiteralText("Your Saturation Level : "+player.getHungerManager().getSaturationLevel()), false);
+        }
+
+        return ActionResult.SUCCESS;
     }
 
     public PistonBehavior getPistonBehavior(BlockState state) {

@@ -2,6 +2,8 @@
   "replace": false,
   "values":
   [
+    "minecraft:water",
+    "minecraft:flowing_water",
     "amgn:molten_chocolate",
     "amgn:flowing_chocolate",
     "amgn:molten_slime",
