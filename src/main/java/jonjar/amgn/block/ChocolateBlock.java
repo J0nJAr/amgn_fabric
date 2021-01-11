@@ -5,6 +5,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
@@ -32,5 +33,9 @@ public class ChocolateBlock extends Block {
             world.setBlockState(pos, ModBlocks.MOLTEN_CHOCOLATE.getDefaultState());
             world.updateNeighbor(pos, ModBlocks.MOLTEN_CHOCOLATE, pos);
         }
+    }
+
+    public PistonBehavior getPistonBehavior(BlockState state) {
+        return PistonBehavior.NORMAL;
     }
 }
