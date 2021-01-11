@@ -3,9 +3,12 @@
   "item.amgn.slime_ingot" : "Slime Ingot",
   "item.amgn.slime_bucket": "Bucket of Slime",
   "item.amgn.chocolate_bucket": "Bucket of Chocolate",
+  "item.amgn.ricecake_ingot": "Rice Cake Ingot",
+  "item.amgn.ricecake_bucket": "Bucket of Rice Cake",
 
   "block.amgn.chocolate_block" : "Chocolate Block",
   "block.amgn.compressed_slime_block" : "Compressed Slime Block",
+  "block.amgn.compressed_ricecake_block" : "Compressed Rice Cake",
 
   "itemGroup.amgn.general" : "AMGN"
 }

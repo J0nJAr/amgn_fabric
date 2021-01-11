@@ -2,6 +2,7 @@ package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
 import jonjar.amgn.block.ChocolateBlock;
+import jonjar.amgn.block.CompressedSlimeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
@@ -27,7 +28,7 @@ public class ModBlocks {
             //luminance()
     );
 
-    public static final Block COMPRESSED_SLIME_BLOCK = new SlimeBlock(FabricBlockSettings
+    public static final Block COMPRESSED_SLIME_BLOCK = new CompressedSlimeBlock(FabricBlockSettings
             .of(Material.ORGANIC_PRODUCT)
             .breakByTool(FabricToolTags.PICKAXES, 0)
             .strength(0.75f, 8.0f)
