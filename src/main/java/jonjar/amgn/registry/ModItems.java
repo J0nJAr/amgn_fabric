@@ -32,12 +32,12 @@ public class ModItems {
      */
     public static void registerItems(){
         CHOCOLATE_INGOT=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
-        SLIME_INGOT= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_block"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
+        SLIME_INGOT= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
 
         Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"ricecake_ingot"), RICECAKE_INGOT);
         Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);
 
-        CHOCOLATE_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
+        CHOCOLATE_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_block"), new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
         COMPRESSED_SLIME_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_slime_block"), new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
 
         CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "chocolate_bucket"), new BucketItem(ModFluids.STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
