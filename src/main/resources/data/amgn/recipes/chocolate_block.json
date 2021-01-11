@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WWW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "amgn:chocolate_ingot"
+    },
+  "result": {
+    "item": "amgn:chocolate_block",
+    "count": 1
+    }
+  }
+}
