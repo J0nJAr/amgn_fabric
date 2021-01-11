@@ -42,7 +42,7 @@ public class ModBlocks {
             .breakByTool(FabricToolTags.SHOVELS, 0)
             .breakByHand(true)
             .strength(0.5f, 5f)
-            .sounds(BlockSoundGroup.SNOW));
+            .sounds(BlockSoundGroup.WOOL));
 
     public static Block MOLTEN_CHOCOLATE;
     public static Block MOLTEN_SLIME;

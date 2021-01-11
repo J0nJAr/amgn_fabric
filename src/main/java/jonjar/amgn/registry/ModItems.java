@@ -1,6 +1,7 @@
 package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
+import jonjar.amgn.ect.ModFoodComponents;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -16,7 +17,7 @@ public class ModItems {
     //아이템
     public static Item CHOCOLATE_INGOT;
     public static Item SLIME_INGOT;
-    public static final Item RICECAKE_INGOT = new Item(new Item.Settings().group(Amgn.ITEM_GROUP));
+    public static final Item RICECAKE_INGOT = new Item(new Item.Settings().group(Amgn.ITEM_GROUP).food(ModFoodComponents.RICECAKE));
 
     // 양동이
     public static BucketItem SLIME_BUCKET;
