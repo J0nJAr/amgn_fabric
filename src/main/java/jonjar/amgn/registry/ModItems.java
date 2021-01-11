@@ -24,7 +24,7 @@ public class ModItems {
     //블럭아이템
     public static final BlockItem CHOCOLATE_BLOCK = new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
     public static final BlockItem COMPRESSED_SLIME_BLOCK = new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
-    public static final BlockItem COMPRESSED_RICECAKE_BLOCK = new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
+    public static final BlockItem COMPRESSED_RICECAKE_BLOCK = new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
 
     /*
     아이템등록
