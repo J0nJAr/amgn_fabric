@@ -9,6 +9,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import javax.imageio.ImageTranscoder;
+
 
 public class ModBlocks {
 
@@ -33,6 +35,13 @@ public class ModBlocks {
             .slipperiness(0.6f)
     );
 
+    public static final Block COMPRESSED_RICECAKE_BLOCK = new Block(FabricBlockSettings
+            .of(Material.CAKE)
+            .breakByTool(FabricToolTags.SHOVELS, 0)
+            .breakByHand(true)
+            .strength(0.5f, 5f)
+            .sounds(BlockSoundGroup.SNOW));
+
     public static Block MOLTEN_CHOCOLATE;
     public static Block MOLTEN_SLIME;
     /*
@@ -41,6 +50,7 @@ public class ModBlocks {
     public static void registerBlocks(){
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);
 
         MOLTEN_SLIME = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_slime"), new FluidBlock(ModFluids.STILL_SLIME, FabricBlockSettings.copy(Blocks.WATER)){});
         MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_chocolate"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});

@@ -3,9 +3,12 @@
   "item.amgn.slime_ingot" : "슬라임 주괴",
   "item.amgn.slime_bucket": "슬라임 양동이",
   "item.amgn.chocolate_bucket": "초콜릿 양동이",
+  "item.amgn.ricecake_ingot" : "떡 주괴",
+  "item.amgn.ricecake_bucket" : "떡 양동이",
 
   "block.amgn.chocolate_block" : "초콜릿 블록",
   "block.amgn.compressed_slime_block" : "압축된 슬라임 블록",
+  "block.amgn.compressed_ricecake_block" : "압축된 떡 블록",
 
   "itemGroup.amgn.general" : "아무거나"
 
