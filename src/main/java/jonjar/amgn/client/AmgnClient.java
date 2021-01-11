@@ -47,12 +47,14 @@ public class AmgnClient implements ClientModInitializer {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");
 
+
         // If they're not already present, add the sprites to the block atlas
         ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) ->
         {
             registry.register(stillSpriteId);
             registry.register(flowingSpriteId);
         });
+
 
         final Identifier fluidId = Registry.FLUID.getId(still);
         final Identifier listenerId = new Identifier(fluidId.getNamespace(), fluidId.getPath() + "_reload_listener");

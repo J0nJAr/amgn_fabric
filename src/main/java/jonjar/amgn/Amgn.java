@@ -19,6 +19,7 @@ public class Amgn implements ModInitializer {
             new Identifier(MODID, "general"),
             () -> new ItemStack(Items.SEA_LANTERN)
     );
+
     @Override
     public void onInitialize() {
 

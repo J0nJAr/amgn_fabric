@@ -1,7 +1,7 @@
 package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
-import jonjar.amgn.fluid.ChocolateFluid;
+import jonjar.amgn.block.ChocolateBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
@@ -17,12 +17,13 @@ public class ModBlocks {
     /*
     블럭 만들기
      */
-    public static final Block CHOCOLATE_BLOCK = new Block(FabricBlockSettings
+    public static final Block CHOCOLATE_BLOCK = new ChocolateBlock(FabricBlockSettings
             .of(Material.METAL)
             .breakByTool(FabricToolTags.PICKAXES,0)
             //.requiresTool()
             .strength(0.75f,8.0f)
             .sounds(BlockSoundGroup.METAL)
+            .ticksRandomly()
             //luminance()
     );
 
