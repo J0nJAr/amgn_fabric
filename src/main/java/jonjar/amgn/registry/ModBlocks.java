@@ -3,9 +3,15 @@ package jonjar.amgn.registry;
 import jonjar.amgn.Amgn;
 import jonjar.amgn.element.block.ChocolateBlock;
 import jonjar.amgn.element.block.CompressedSlimeBlock;
+import jonjar.amgn.element.blockentity.PulverizerBlock;
+import jonjar.amgn.element.blockentity.PulverizerBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -44,6 +50,9 @@ public class ModBlocks {
 
     public static Block MOLTEN_CHOCOLATE;
     public static Block MOLTEN_SLIME;
+
+    public static Block PULVERIZER_BLOCK;
+    public static BlockEntityType PULVERIZER_BLOCK_ENTITY;
     /*
     블럭 등록
      */
@@ -55,5 +64,8 @@ public class ModBlocks {
         MOLTEN_SLIME = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_slime"), new FluidBlock(ModFluids.STILL_SLIME, FabricBlockSettings.copy(Blocks.WATER)){});
         MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_chocolate"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});
 
+
+        PULVERIZER_BLOCK = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "pulverizer"), new PulverizerBlock(FabricBlockSettings.of(Material.METAL)));
+        PULVERIZER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Amgn.MODID, "pulverizer"), BlockEntityType.Builder.create(PulverizerBlockEntity::new, PULVERIZER_BLOCK).build(null));
     }
 }

@@ -2,7 +2,10 @@ package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
 import jonjar.amgn.registry.ect.ModFoodComponents;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -26,7 +29,7 @@ public class ModItems {
     public static BlockItem CHOCOLATE_BLOCK;
     public static BlockItem COMPRESSED_SLIME_BLOCK;
     public static final BlockItem COMPRESSED_RICECAKE_BLOCK = new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
-
+    public static BlockItem PULVERIZER;
     /*
     아이템등록
      */
@@ -42,5 +45,7 @@ public class ModItems {
 
         CHOCOLATE_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "chocolate_bucket"), new BucketItem(ModFluids.STILL_MOLTEN_CHOCOLATE, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
         SLIME_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "slime_bucket"), new BucketItem(ModFluids.STILL_SLIME, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
+
+        PULVERIZER=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"pulverizer"), new BlockItem(ModBlocks.PULVERIZER_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
     }
 }

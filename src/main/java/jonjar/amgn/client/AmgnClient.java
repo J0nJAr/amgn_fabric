@@ -1,13 +1,15 @@
 package jonjar.amgn.client;
 
-import jonjar.amgn.Amgn;
+import jonjar.amgn.element.screen.PulverizerScreen;
 import jonjar.amgn.registry.ModFluids;
+import jonjar.amgn.registry.ModScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -15,7 +17,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.resource.ResourceManager;
@@ -33,14 +34,21 @@ public class AmgnClient implements ClientModInitializer {
     @Override
     public void onInitializeClient()
     {
+        ScreenRegistry.register(ModScreen.PULVERIZER_SCREEN_HANDLER, PulverizerScreen::new);
+
+        initializeScreen();
         // ...
         setupFluidRendering(ModFluids.STILL_SLIME, ModFluids.FLOWING_SLIME, new Identifier("minecraft", "water"), 0xABF200);
         setupFluidRendering(ModFluids.STILL_MOLTEN_CHOCOLATE, ModFluids.FLOWING_CHOCOLATE, new Identifier("minecraft", "water"), 0x430000);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_SLIME, ModFluids.FLOWING_SLIME);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_MOLTEN_CHOCOLATE, ModFluids.FLOWING_CHOCOLATE);
         // ...
+
     }
 
+    public static void initializeScreen(){
+
+    }
 
     public static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color)
     {
