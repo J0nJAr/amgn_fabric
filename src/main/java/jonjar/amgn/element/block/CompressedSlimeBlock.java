@@ -1,4 +1,4 @@
-package jonjar.amgn.block;
+package jonjar.amgn.element.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlimeBlock;

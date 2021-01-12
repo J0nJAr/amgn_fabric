@@ -1,4 +1,4 @@
-package jonjar.amgn.ect;
+package jonjar.amgn.registry.ect;
 
 import net.minecraft.item.FoodComponent;
 

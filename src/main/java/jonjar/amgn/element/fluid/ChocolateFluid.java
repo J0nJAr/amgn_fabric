@@ -1,5 +1,6 @@
-package jonjar.amgn.fluid;
+package jonjar.amgn.element.fluid;
 
+import jonjar.amgn.base.BaseFluid;
 import jonjar.amgn.registry.ModBlocks;
 import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
@@ -12,7 +13,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.world.WorldView;
 
 
-public abstract class ChocolateFluid extends amgnFluid {
+public abstract class ChocolateFluid extends BaseFluid {
 
     @Override
     public Fluid getStill()

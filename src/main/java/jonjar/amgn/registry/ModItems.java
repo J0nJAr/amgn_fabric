@@ -1,8 +1,7 @@
 package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
-import jonjar.amgn.ect.ModFoodComponents;
-import net.minecraft.fluid.Fluids;
+import jonjar.amgn.registry.ect.ModFoodComponents;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

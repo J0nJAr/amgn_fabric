@@ -1,5 +1,6 @@
-package jonjar.amgn.fluid;
+package jonjar.amgn.element.fluid;
 
+import jonjar.amgn.base.BaseFluid;
 import jonjar.amgn.registry.ModBlocks;
 import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
@@ -10,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-public class SlimeFluid extends amgnFluid{
+public class SlimeFluid extends BaseFluid {
 
     //
     @Override

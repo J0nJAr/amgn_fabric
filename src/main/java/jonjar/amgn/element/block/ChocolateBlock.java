@@ -1,10 +1,9 @@
-package jonjar.amgn.block;
+package jonjar.amgn.element.block;
 
 import jonjar.amgn.registry.ModBlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;

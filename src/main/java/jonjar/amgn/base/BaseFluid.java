@@ -1,4 +1,4 @@
-package jonjar.amgn.fluid;
+package jonjar.amgn.base;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,7 +12,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public abstract class amgnFluid extends FlowableFluid
+public abstract class BaseFluid extends FlowableFluid
 {
     /**
      * @return is the given fluid an instance of this fluid?

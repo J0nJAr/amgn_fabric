@@ -1,4 +1,4 @@
-package jonjar.amgn.block;
+package jonjar.amgn.element.block;
 
 public class CompressedRicecakeBlock {
 }
