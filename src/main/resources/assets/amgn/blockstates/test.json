@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "test=1": { "model": "amgn:block/test_1" },
+    "test=2": { "model": "amgn:block/test_2" },
+    "test=3": { "model": "amgn:block/test_3" },
+    "test=4": { "model": "amgn:block/test_4" }
+  }
+}

@@ -2,7 +2,9 @@ package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
 import jonjar.amgn.element.block.ChocolateBlock;
+import jonjar.amgn.element.block.CompressedRicecakeBlock;
 import jonjar.amgn.element.block.CompressedSlimeBlock;
+import jonjar.amgn.element.block.test;
 import jonjar.amgn.element.blockentity.PulverizerBlock;
 import jonjar.amgn.element.blockentity.PulverizerBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -41,12 +43,21 @@ public class ModBlocks {
             .slipperiness(0.6f)
     );
 
-    public static final Block COMPRESSED_RICECAKE_BLOCK = new Block(FabricBlockSettings
+    public static final Block COMPRESSED_RICECAKE_BLOCK = new CompressedRicecakeBlock(FabricBlockSettings
             .of(Material.CAKE)
             .breakByTool(FabricToolTags.SHOVELS, 0)
             .breakByHand(true)
             .strength(0.5f, 5f)
-            .sounds(BlockSoundGroup.WOOL));
+            .sounds(BlockSoundGroup.WOOL)
+            .nonOpaque());
+
+    public static final Block TEST = new test(FabricBlockSettings
+            .of(Material.CAKE)
+            .breakByTool(FabricToolTags.SHOVELS, 0)
+            .breakByHand(true)
+            .strength(0.5f, 5f)
+            .sounds(BlockSoundGroup.WOOL)
+            .nonOpaque());
 
     public static Block MOLTEN_CHOCOLATE;
     public static Block MOLTEN_SLIME;
@@ -60,6 +71,7 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"test"), TEST);
 
         MOLTEN_SLIME = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_slime"), new FluidBlock(ModFluids.STILL_SLIME, FabricBlockSettings.copy(Blocks.WATER)){});
         MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_chocolate"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});

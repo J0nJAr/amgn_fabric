@@ -1,5 +1,12 @@
 {
   "variants": {
-    "": { "model": "amgn:block/compressed_ricecake_block" }
+    "ricecakebites=0": { "model": "amgn:block/compressed_ricecake_block" },
+    "ricecakebites=1": { "model": "amgn:block/compressed_ricecake_block_1" },
+    "ricecakebites=2": { "model": "amgn:block/compressed_ricecake_block_2" },
+    "ricecakebites=3": { "model": "amgn:block/compressed_ricecake_block_3" },
+    "ricecakebites=4": { "model": "amgn:block/compressed_ricecake_block_4" },
+    "ricecakebites=5": { "model": "amgn:block/compressed_ricecake_block_5" },
+    "ricecakebites=6": { "model": "amgn:block/compressed_ricecake_block_6" },
+    "ricecakebites=7": { "model": "amgn:block/compressed_ricecake_block_7" }
   }
 }
