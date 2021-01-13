@@ -5,8 +5,12 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -14,14 +18,19 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
 public class ChocolateBlock extends Block {
+    Random random = new Random();
 
     public ChocolateBlock(AbstractBlock.Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(SLIMELY, false));
     }
+
+    public static final BooleanProperty SLIMELY = BooleanProperty.of("slimely");
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos)) {
@@ -48,7 +57,19 @@ public class ChocolateBlock extends Block {
         return ActionResult.SUCCESS;
     }
 
+    @Override
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        SlimeEntity slime;
+        if (!world.getBlockState(pos).get(SLIMELY))
+            slime = EntityType.SLIME.create((World) world);
+    }
+
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.NORMAL;
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+        stateManager.add(SLIMELY);
     }
 }
