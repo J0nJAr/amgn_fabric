@@ -10,14 +10,15 @@ public class PulverizerRecipeRegister {
     public static RecipeType<PulverizerRecipe> PULVERIZE_RECIPE_TYPE;
     public static RecipeSerializer<PulverizerRecipe> PULVERIZE_RECIPE_SERIALIZER;
 
-    public void registerRecipes(){
+    static {
         PULVERIZE_RECIPE_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Amgn.MODID,"pulverize"), new PulverizerRecipeSerializer(PulverizerRecipe::new, 200));
         PULVERIZE_RECIPE_TYPE  = Registry.register(Registry.RECIPE_TYPE, new Identifier(Amgn.MODID, "pulverize"), new RecipeType<PulverizerRecipe>() {
             @Override
             public String toString() {
-                return "pulverize";
+                return Amgn.MODID+":pulverize";
             }
         });
     }
 
+    public void registerRecipes(){}
 }

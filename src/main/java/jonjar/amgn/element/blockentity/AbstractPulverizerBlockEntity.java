@@ -1,11 +1,9 @@
 package jonjar.amgn.element.blockentity;
 
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -34,9 +32,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable {
@@ -45,15 +41,15 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     private static final int[] BOTTOM_SLOTS = new int[]{2, 1};
     private static final int[] SIDE_SLOTS = new int[]{1};
     protected DefaultedList<ItemStack> inventory;
-    private int burnTime;
-    private int fuelTime;
-    private int pulverizeTime;
-    private int pulverizeTimeTotal;
+    private int burnTime=0;
+    private int fuelTime=0;
+    private int pulverizeTime=0;
+    private int pulverizeTimeTotal=0;
     protected final PropertyDelegate propertyDelegate;
     private final Object2IntOpenHashMap<Identifier> recipesUsed;
-    protected final RecipeType<? extends AbstractCookingRecipe> recipeType;
+    protected final RecipeType<? extends AbstractPulverizerRecipe> recipeType;
 
-    protected AbstractPulverizerBlockEntity(BlockEntityType<?> blockEntityType, RecipeType<? extends AbstractCookingRecipe> recipeType) {
+    protected AbstractPulverizerBlockEntity(BlockEntityType<?> blockEntityType, RecipeType<? extends AbstractPulverizerRecipe> recipeType) {
         super(blockEntityType);
         this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
         this.propertyDelegate = new PropertyDelegate() {
@@ -179,12 +175,14 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
 
         if (!this.world.isClient) {
             ItemStack itemStack = (ItemStack)this.inventory.get(1);
+            //Amgn.LOG.log(Level.INFO,itemStack.getItem().getName());
             if (!this.isBurning() && (itemStack.isEmpty() || ((ItemStack)this.inventory.get(0)).isEmpty())) {
                 if (!this.isBurning() && this.pulverizeTime > 0) {
                     this.pulverizeTime = MathHelper.clamp(this.pulverizeTime - 2, 0, this.pulverizeTimeTotal);
                 }
             } else {
                 Recipe<?> recipe = (Recipe)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).orElse(null);
+
                 if (!this.isBurning() && this.canAcceptRecipeOutput(recipe)) {
                     this.burnTime = this.getFuelTime(itemStack);
                     this.fuelTime = this.burnTime;
@@ -281,7 +279,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     }
 
     protected int getpulverizeTime() {
-        return (Integer)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).map(AbstractCookingRecipe::getCookTime).orElse(200);
+        return (Integer)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).map(AbstractPulverizerRecipe::getPulverizeTime).orElse(200);
     }
 
     public static boolean canUseAsFuel(ItemStack stack) {
@@ -398,25 +396,25 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     }
 
     public void dropExperience(PlayerEntity player) {
-        List<Recipe<?>> list = this.method_27354(player.world, player.getPos());
-        player.unlockRecipes((Collection)list);
+//        List<Recipe<?>> list = this.method_27354(player.world, player.getPos());
+//        player.unlockRecipes((Collection)list);
         this.recipesUsed.clear();
     }
 
-    public List<Recipe<?>> method_27354(World world, Vec3d vec3d) {
-        List<Recipe<?>> list = Lists.newArrayList();
-        ObjectIterator var4 = this.recipesUsed.object2IntEntrySet().iterator();
-
-        while(var4.hasNext()) {
-            Object2IntMap.Entry<Identifier> entry = (Object2IntMap.Entry)var4.next();
-            world.getRecipeManager().get((Identifier)entry.getKey()).ifPresent((recipe) -> {
-                list.add(recipe);
-                dropExperience(world, vec3d, entry.getIntValue(), ((AbstractCookingRecipe)recipe).getExperience());
-            });
-        }
-
-        return list;
-    }
+//    public List<Recipe<?>> method_27354(World world, Vec3d vec3d) {
+//        List<Recipe<?>> list = Lists.newArrayList();
+//        ObjectIterator var4 = this.recipesUsed.object2IntEntrySet().iterator();
+//
+//        while(var4.hasNext()) {
+//            Object2IntMap.Entry<Identifier> entry = (Object2IntMap.Entry)var4.next();
+//            world.getRecipeManager().get((Identifier)entry.getKey()).ifPresent((recipe) -> {
+//                list.add(recipe);
+//                dropExperience(world, vec3d, entry.getIntValue(), ((AbstractPulverizerRecipe)recipe).getExperience());
+//            });
+//        }
+//
+//        return list;
+//    }
 
     private static void dropExperience(World world, Vec3d vec3d, int i, float f) {
         int j = MathHelper.floor((float)i * f);

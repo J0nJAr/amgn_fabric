@@ -20,6 +20,6 @@ public class PulverizerRecipe extends AbstractPulverizerRecipe {
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializer.BLASTING;
+        return PulverizerRecipeRegister.PULVERIZE_RECIPE_SERIALIZER;
     }
 }
