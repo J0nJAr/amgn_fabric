@@ -25,12 +25,12 @@ import java.util.Random;
 
 
 public class PulverizerBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING=HorizontalFacingBlock.FACING;
-    public static final IntProperty CURRENT = IntProperty.of("current", 0, 4);
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final BooleanProperty ISON = BooleanProperty.of("ison");
 
     public PulverizerBlock(Settings settings) {
         super(settings);
-        setDefaultState(getStateManager().getDefaultState().with(CURRENT, 1));
+        setDefaultState(getStateManager().getDefaultState().with(ISON, false));
     }
 
     @Override
@@ -96,11 +96,11 @@ public class PulverizerBlock extends BlockWithEntity {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING,CURRENT});
+        builder.add(new Property[]{FACING,ISON});
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(CURRENT)>0) {
+        if (state.get(ISON)) {
 
 //            double d = (double)pos.getX() + 0.5D;
 //            double e = (double)pos.getY();
@@ -120,8 +120,6 @@ public class PulverizerBlock extends BlockWithEntity {
 //            double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52D : h;
 //            world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 //            world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
-        }else{
-            world.setBlockState(pos,state.with(CURRENT,1));
         }
     }
 
