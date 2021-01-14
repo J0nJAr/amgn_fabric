@@ -3,7 +3,6 @@ package jonjar.amgn.element.blockentity;
 
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import jonjar.amgn.Amgn;
 import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
@@ -31,7 +30,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -173,10 +171,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         boolean is_starting_burn = false;
         if (this.isBurning()) {
             --this.burnTime;
-            this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.CURRENT, (int)(this.getWorld().getTime()/16%4)+1), 3);
-            Amgn.LOG.log(Level.INFO,this.world.getBlockState(this.pos).get(PulverizerBlock.CURRENT));
-        }else{
-            this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.CURRENT, 0), 3);
+
         }
 
         if (!this.world.isClient) {
@@ -223,6 +218,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
             if (is_burning != this.isBurning()) {
                 //Amgn.LOG.log(Level.INFO,this.burnTime+"   "+is_burning);
                 is_starting_burn = true;
+                this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.ISON, this.isBurning()), 3);
 
             }
         }
