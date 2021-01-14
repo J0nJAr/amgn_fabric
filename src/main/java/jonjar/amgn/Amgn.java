@@ -6,16 +6,12 @@ import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.lang.reflect.Field;
 
 
 public class Amgn implements ModInitializer {
@@ -32,21 +28,21 @@ public class Amgn implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        for(Block b : Registry.BLOCK){
-            if(b.getTranslationKey().contains("minecraft")){
-                try{
-                    Class c = Class.forName("net.minecraft.block.AbstractBlock");
-                    Field field = c.getDeclaredField("slipperiness");
-                    field.setAccessible(true);
-                    field.set(b, 1.11F);
-                    field.setAccessible(false);
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-
-        }
+//        for(Block b : Registry.BLOCK){
+//            if(b.getTranslationKey().contains("minecraft")){
+//                try{
+//                    Class c = Class.forName("net.minecraft.block.AbstractBlock");
+//                    Field field = c.getDeclaredField("slipperiness");
+//                    field.setAccessible(true);
+//                    field.set(b, 1.11F);
+//                    field.setAccessible(false);
+//                } catch(Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//        }
 
 
         ModFluids.registryFluids();//액체 등록

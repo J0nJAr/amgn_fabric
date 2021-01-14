@@ -10,6 +10,8 @@
   "block.amgn.compressed_slime_block" : "Compressed Slime Block",
   "block.amgn.compressed_ricecake_block" : "Compressed Rice Cake",
 
+  "block.amgn.pulverizer" : "Pulverizer",
+
   "container.pulverizer" : "Pulverizer",
 
   "itemGroup.amgn.general" : "AMGN"

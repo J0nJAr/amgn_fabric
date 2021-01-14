@@ -7,4 +7,5 @@ public class ModFeatures {
 //        SLIME_LAKE = Registry.register(Registry.FEATURE, new Identifier(Amgn.MODID, "acid_lake"), new LakeFeature(SingleStateFeatureConfig.CODEC));
 //
 //    }
+
 }

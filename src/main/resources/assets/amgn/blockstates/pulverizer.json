@@ -1,66 +1,79 @@
 {
   "variants": {
-    "facing=east,current=1": {
+    "current=0,facing=east": {
+      "model": "amgn:block/pulverizer",
+      "y": 90
+    },
+    "current=1,facing=east": {
       "model": "amgn:block/pulverizer_1",
       "y": 90
     },
-    "facing=east,current=2": {
+    "current=2,facing=east": {
       "model": "amgn:block/pulverizer_2",
       "y": 90
     },
-    "facing=east,current=3": {
+    "current=3,facing=east": {
       "model": "amgn:block/pulverizer_3",
       "y": 90
     },
-    "facing=east,current=4": {
+    "current=4,facing=east": {
       "model": "amgn:block/pulverizer_4",
       "y": 90
-    },"facing=north,current=1": {
+    },
+    "current=0,facing=north": {
+      "model": "amgn:block/pulverizer"
+    },
+    "current=1,facing=north": {
       "model": "amgn:block/pulverizer_1"
     },
-    "facing=north,current=2": {
+    "current=2,facing=north": {
       "model": "amgn:block/pulverizer_2"
     },
-    "facing=north,current=3": {
+    "current=3,facing=north": {
       "model": "amgn:block/pulverizer_3"
     },
-    "facing=north,current=4": {
+    "current=4,facing=north": {
       "model": "amgn:block/pulverizer_4"
     },
-    "facing=south,current=1": {
+    "current=0,facing=south": {
+      "model": "amgn:block/pulverizer",
+      "y": 180
+    },
+    "current=1,facing=south": {
       "model": "amgn:block/pulverizer_1",
       "y": 180
     },
-    "facing=south,current=2": {
+    "current=2,facing=south": {
       "model": "amgn:block/pulverizer_2",
       "y": 180
     },
-    "facing=south,current=3": {
+    "current=3,facing=south": {
       "model": "amgn:block/pulverizer_3",
       "y": 180
     },
-    "facing=south,current=4": {
+    "current=4,facing=south": {
       "model": "amgn:block/pulverizer_4",
       "y": 180
     },
-    "facing=south,current=1": {
+    "current=0,facing=west": {
+      "model": "amgn:block/pulverizer",
+      "y": 270
+    },
+    "current=1,facing=west": {
       "model": "amgn:block/pulverizer_1",
       "y": 270
     },
-    "facing=south,current=2": {
+    "current=2,facing=west": {
       "model": "amgn:block/pulverizer_2",
       "y": 270
     },
-    "facing=south,current=3": {
+    "current=3,facing=west": {
       "model": "amgn:block/pulverizer_3",
       "y": 270
     },
-    "facing=south,current=4": {
+    "current=4,facing=west": {
       "model": "amgn:block/pulverizer_4",
       "y": 270
-    },
-    "": {
-      "model": "amgn:block/pulverizer_1"
     }
   }
 }

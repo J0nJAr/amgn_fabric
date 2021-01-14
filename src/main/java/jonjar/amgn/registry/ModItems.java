@@ -48,6 +48,6 @@ public class ModItems {
         SLIME_BUCKET = Registry.register(Registry.ITEM, new Identifier(Amgn.MODID, "slime_bucket"), new BucketItem(ModFluids.STILL_SLIME, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(Amgn.ITEM_GROUP)));
 
         PULVERIZER=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"pulverizer"), new BlockItem(ModBlocks.PULVERIZER_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
-        PULVERIZER=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"test"), new BlockItem(ModBlocks.TEST, new Item.Settings().group(Amgn.ITEM_GROUP)));
+        TEST=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"test"), new BlockItem(ModBlocks.TEST, new Item.Settings().group(Amgn.ITEM_GROUP)));
     }
 }

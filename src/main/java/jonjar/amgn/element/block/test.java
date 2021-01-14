@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class test extends Block {
-    public static final IntProperty TEST = IntProperty.of("test", 1, 5);
+    public static final IntProperty TEST = IntProperty.of("test", 1, 4);
 
     public test(Settings settings){
         super(settings);
