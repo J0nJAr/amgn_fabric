@@ -30,13 +30,13 @@ public class PulverizerScreenHandler extends ScreenHandler {
     private final RecipeType<? extends AbstractPulverizerRecipe> recipeType;
 
     protected PulverizerScreenHandler(ScreenHandlerType<PulverizerScreenHandler> type, RecipeType<PulverizerRecipe> recipeType, int i, PlayerInventory playerInventory) {
-        this(type, recipeType, i, playerInventory, new SimpleInventory(3), new ArrayPropertyDelegate(4));
+        this(type, recipeType, i, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
     }
 
     protected PulverizerScreenHandler(ScreenHandlerType<PulverizerScreenHandler> type, RecipeType<? extends AbstractPulverizerRecipe> recipeType, int i, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
         super(type, i);
         this.recipeType = recipeType;
-        checkSize(inventory, 3);
+        checkSize(inventory, 4);
         checkDataCount(propertyDelegate, 4);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
@@ -44,6 +44,7 @@ public class PulverizerScreenHandler extends ScreenHandler {
         this.addSlot(new Slot(inventory, 0, 56, 17));
         this.addSlot(new Slot(inventory, 1, 56, 53));
         this.addSlot(new Slot(inventory, 2, 116, 35));
+        this.addSlot(new Slot(inventory, 3, 20, 35));
 
         int l;
         for(l = 0; l < 3; ++l) {

@@ -20,5 +20,5 @@ public class PulverizerRecipeRegister {
         });
     }
 
-    public void registerRecipes(){}
+    public static void registerRecipes(){}
 }

@@ -3,6 +3,7 @@ package jonjar.amgn.element.blockentity;
 
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import jonjar.amgn.Amgn;
 import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -51,7 +53,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
 
     protected AbstractPulverizerBlockEntity(BlockEntityType<?> blockEntityType, RecipeType<? extends AbstractPulverizerRecipe> recipeType) {
         super(blockEntityType);
-        this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 switch(index) {
@@ -99,7 +101,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         addFuel(map, (ItemConvertible)Blocks.COAL_BLOCK, 16000);
         addFuel(map, (ItemConvertible)Items.BLAZE_ROD, 2400);
         addFuel(map, (ItemConvertible)Items.COAL, 1600);
-        addFuel(map, (ItemConvertible)Items.CHARCOAL, 1600);
+        addFuel(map, (ItemConvertible)Items.CHARCOAL, 80);
         return map;
     }
 
@@ -171,9 +173,15 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         boolean is_starting_burn = false;
         if (this.isBurning()) {
             --this.burnTime;
+            this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.CURRENT, (int)(this.getWorld().getTime()/16%4)+1), 3);
+            Amgn.LOG.log(Level.INFO,this.world.getBlockState(this.pos).get(PulverizerBlock.CURRENT));
+        }else{
+            this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.CURRENT, 0), 3);
         }
 
         if (!this.world.isClient) {
+
+
             ItemStack itemStack = (ItemStack)this.inventory.get(1);
             //Amgn.LOG.log(Level.INFO,itemStack.getItem().getName());
             if (!this.isBurning() && (itemStack.isEmpty() || ((ItemStack)this.inventory.get(0)).isEmpty())) {
@@ -203,7 +211,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                     ++this.pulverizeTime;
                     if (this.pulverizeTime == this.pulverizeTimeTotal) {
                         this.pulverizeTime = 0;
-                        this.pulverizeTimeTotal = this.getpulverizeTime();
+                        this.pulverizeTimeTotal = this.getPulverizeTime();
                         this.craftRecipe(recipe);
                         is_starting_burn = true;
                     }
@@ -213,8 +221,9 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
             }
 
             if (is_burning != this.isBurning()) {
+                //Amgn.LOG.log(Level.INFO,this.burnTime+"   "+is_burning);
                 is_starting_burn = true;
-                this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.LIT, this.isBurning()), 3);
+
             }
         }
 
@@ -278,7 +287,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         }
     }
 
-    protected int getpulverizeTime() {
+    protected int getPulverizeTime() {
         return (Integer)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).map(AbstractPulverizerRecipe::getPulverizeTime).orElse(200);
     }
 
@@ -349,7 +358,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         }
 
         if (slot == 0 && !bl) {
-            this.pulverizeTimeTotal = this.getpulverizeTime();
+            this.pulverizeTimeTotal = this.getPulverizeTime();
             this.pulverizeTime = 0;
             this.markDirty();
         }

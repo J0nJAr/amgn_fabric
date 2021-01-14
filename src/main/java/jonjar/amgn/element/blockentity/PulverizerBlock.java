@@ -6,16 +6,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
+import net.minecraft.state.property.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -31,11 +25,12 @@ import java.util.Random;
 
 
 public class PulverizerBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING;
-    public static final BooleanProperty LIT;
+    public static final DirectionProperty FACING=HorizontalFacingBlock.FACING;
+    public static final IntProperty CURRENT = IntProperty.of("current", 0, 4);
 
     public PulverizerBlock(Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(CURRENT, 1));
     }
 
     @Override
@@ -101,32 +96,33 @@ public class PulverizerBlock extends BlockWithEntity {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, LIT});
+        builder.add(new Property[]{FACING,CURRENT});
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if ((Boolean)state.get(LIT)) {
-            double d = (double)pos.getX() + 0.5D;
-            double e = (double)pos.getY();
-            double f = (double)pos.getZ() + 0.5D;
-            if (random.nextDouble() < 0.1D) {
-                world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
-            }
+        if (state.get(CURRENT)>0) {
 
-            Direction direction = (Direction)state.get(FACING);
-            Direction.Axis axis = direction.getAxis();
-            double g = 0.52D;
-            double h = random.nextDouble() * 0.6D - 0.3D;
-            double i = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52D : h;
-            double j = random.nextDouble() * 6.0D / 16.0D;
-            double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52D : h;
-            world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
-            world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
+//            double d = (double)pos.getX() + 0.5D;
+//            double e = (double)pos.getY();
+//            double f = (double)pos.getZ() + 0.5D;
+
+
+//            if (random.nextDouble() < 0.1D) {
+//                world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+//            }
+//
+//            Direction direction = (Direction)state.get(FACING);
+//            Direction.Axis axis = direction.getAxis();
+//            double g = 0.52D;
+//            double h = random.nextDouble() * 0.6D - 0.3D;
+//            double i = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52D : h;
+//            double j = random.nextDouble() * 6.0D / 16.0D;
+//            double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52D : h;
+//            world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
+//            world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
+        }else{
+            world.setBlockState(pos,state.with(CURRENT,1));
         }
     }
 
-    static {
-        FACING = HorizontalFacingBlock.FACING;
-        LIT = Properties.LIT;
-    }
 }

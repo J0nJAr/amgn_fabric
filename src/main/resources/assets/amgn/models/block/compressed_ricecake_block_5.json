@@ -1,0 +1,22 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "amgn:block/compressed_ricecake_block",
+    "bottom": "amgn:block/compressed_ricecake_block",
+    "top": "amgn:block/compressed_ricecake_block",
+    "side": "amgn:block/compressed_ricecake_block"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 6, 16 ],
+      "faces": {
+        "down":  { "texture": "#bottom" },
+        "up":    { "texture": "#top" },
+        "north": { "texture": "#side" },
+        "south": { "texture": "#side" },
+        "west":  { "texture": "#side" },
+        "east":  { "texture": "#side" }
+      }
+    }
+  ]
+}
