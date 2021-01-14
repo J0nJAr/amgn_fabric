@@ -12,10 +12,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
+import net.minecraft.state.property.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -33,6 +30,7 @@ import java.util.Random;
 public class PulverizerBlock extends BlockWithEntity {
     public static final DirectionProperty FACING;
     public static final BooleanProperty LIT;
+    public static final IntProperty CURRENT = IntProperty.of("current", 1, 5);;
 
     public PulverizerBlock(Settings settings) {
         super(settings);
@@ -106,9 +104,16 @@ public class PulverizerBlock extends BlockWithEntity {
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if ((Boolean)state.get(LIT)) {
+
             double d = (double)pos.getX() + 0.5D;
             double e = (double)pos.getY();
             double f = (double)pos.getZ() + 0.5D;
+            int img = (int)(world.getTime()%4);
+
+
+//            world.setBlockState(pos,state.with(CURRENT,img));
+
+
             if (random.nextDouble() < 0.1D) {
                 world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
@@ -122,11 +127,14 @@ public class PulverizerBlock extends BlockWithEntity {
             double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52D : h;
             world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
             world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
+        }else{
+            world.setBlockState(pos,state.with(CURRENT,1));
         }
     }
 
     static {
         FACING = HorizontalFacingBlock.FACING;
         LIT = Properties.LIT;
+
     }
 }

@@ -1,33 +1,62 @@
 {
   "variants": {
-    "facing=east,lit=false": {
-      "model": "minecraft:block/furnace",
+    "facing=east,current=1": {
+      "model": "amgn:block/pulverizer_1",
       "y": 90
     },
-    "facing=east,lit=true": {
-      "model": "minecraft:block/furnace_on",
+    "facing=east,current=2": {
+      "model": "amgn:block/pulverizer_2",
       "y": 90
     },
-    "facing=north,lit=false": {
-      "model": "minecraft:block/furnace"
+    "facing=east,current=3": {
+      "model": "amgn:block/pulverizer_3",
+      "y": 90
     },
-    "facing=north,lit=true": {
-      "model": "minecraft:block/furnace_on"
+    "facing=east,current=4": {
+      "model": "amgn:block/pulverizer_4",
+      "y": 90
+    },"facing=north,current=1": {
+      "model": "amgn:block/pulverizer_1"
     },
-    "facing=south,lit=false": {
-      "model": "minecraft:block/furnace",
+    "facing=north,current=2": {
+      "model": "amgn:block/pulverizer_2"
+    },
+    "facing=north,current=3": {
+      "model": "amgn:block/pulverizer_3"
+    },
+    "facing=north,current=4": {
+      "model": "amgn:block/pulverizer_4"
+    },
+    "facing=south,current=1": {
+      "model": "amgn:block/pulverizer_1",
       "y": 180
     },
-    "facing=south,lit=true": {
-      "model": "minecraft:block/furnace_on",
+    "facing=south,current=2": {
+      "model": "amgn:block/pulverizer_2",
       "y": 180
     },
-    "facing=west,lit=false": {
-      "model": "minecraft:block/furnace",
+    "facing=south,current=3": {
+      "model": "amgn:block/pulverizer_3",
+      "y": 180
+    },
+    "facing=south,current=4": {
+      "model": "amgn:block/pulverizer_4",
+      "y": 180
+    },
+    "facing=south,current=1": {
+      "model": "amgn:block/pulverizer_1",
       "y": 270
     },
-    "facing=west,lit=true": {
-      "model": "minecraft:block/furnace_on",
+    "facing=south,current=2": {
+      "model": "amgn:block/pulverizer_2",
+      "y": 270
+    },
+    "facing=south,current=3": {
+      "model": "amgn:block/pulverizer_3",
+      "y": 270
+    },
+    "facing=south,current=4": {
+      "model": "amgn:block/pulverizer_4",
       "y": 270
     }
   }

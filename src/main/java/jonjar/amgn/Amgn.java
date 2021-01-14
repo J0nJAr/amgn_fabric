@@ -1,5 +1,6 @@
 package jonjar.amgn;
 
+import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
 import jonjar.amgn.registry.ModBlocks;
 import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
@@ -51,5 +52,6 @@ public class Amgn implements ModInitializer {
         ModFluids.registryFluids();//액체 등록
         ModBlocks.registerBlocks();//블럭 등록
         ModItems.registerItems();//아이템 등록
+        PulverizerRecipeRegister.registerRecipes();
     }
 }

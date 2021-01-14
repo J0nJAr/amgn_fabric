@@ -5,7 +5,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -60,8 +59,9 @@ public class ChocolateBlock extends Block {
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         SlimeEntity slime;
-        if (!world.getBlockState(pos).get(SLIMELY))
-            slime = EntityType.SLIME.create((World) world);
+        //if (!world.getBlockState(pos).get(SLIMELY))
+       //     Amgn.LOG.log(Level.INFO,"Slimely chocolate block brocken");
+
     }
 
     public PistonBehavior getPistonBehavior(BlockState state) {
