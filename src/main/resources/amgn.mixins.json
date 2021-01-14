@@ -4,6 +4,8 @@
   "package": "jonjar.amgn.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
   ],

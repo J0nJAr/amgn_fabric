@@ -3,10 +3,11 @@
   "id": "amgn",
   "version": "${version}",
   "name": "Amgn",
-  "description": "",
+  "description": "Literally AMGN.",
   "authors": [
     "KimBepo",
-    "Macham"
+    "macham",
+    "Rice_Cake_Soup"
   ],
   "contact": {
     "homepage": "https://github.com/J0nJAr/amgn_fabric"
@@ -23,6 +24,7 @@
     ]
   },
   "mixins": [
+    "amgn.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.10.8",
