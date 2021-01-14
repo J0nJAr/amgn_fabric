@@ -58,6 +58,9 @@
     "facing=south,current=4": {
       "model": "amgn:block/pulverizer_4",
       "y": 270
+    },
+    "": {
+      "model": "amgn:block/pulverizer_1"
     }
   }
 }

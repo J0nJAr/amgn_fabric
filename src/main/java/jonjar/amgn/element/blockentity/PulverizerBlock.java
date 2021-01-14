@@ -30,10 +30,11 @@ import java.util.Random;
 public class PulverizerBlock extends BlockWithEntity {
     public static final DirectionProperty FACING;
     public static final BooleanProperty LIT;
-    public static final IntProperty CURRENT = IntProperty.of("current", 1, 5);;
+    public static final IntProperty CURRENT = IntProperty.of("current", 0, 4);
 
     public PulverizerBlock(Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(CURRENT, 0));
     }
 
     @Override
@@ -99,7 +100,7 @@ public class PulverizerBlock extends BlockWithEntity {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, LIT});
+        builder.add(new Property[]{FACING, LIT,CURRENT});
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
