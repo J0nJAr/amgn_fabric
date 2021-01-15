@@ -29,6 +29,26 @@ public class Amgn implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        /*
+        try{
+            Class c = Class.forName("net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry");
+            Field field = c.getDeclaredField("renderManagerMap");
+            Map<EntityType<?>, EntityRenderer<?>> map = (Map<EntityType<?>, EntityRenderer<?>>) field.get(c);
+
+            for(EntityRenderer er : map.values()){
+                er.getRenderManager().
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         */
+
+
 //        for(Block b : Registry.BLOCK){
 //            if(b.getTranslationKey().contains("minecraft")){
 //                try{

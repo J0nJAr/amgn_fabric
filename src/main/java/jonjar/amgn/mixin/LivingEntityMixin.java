@@ -8,7 +8,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,10 +21,6 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow @Final private DefaultedList<ItemStack> equippedArmor;
 
-    @Shadow public abstract void travel(Vec3d movementInput);
-
-    @Shadow public abstract Vec3d method_26318(Vec3d vec3d, float f);
-
     public LivingEntityMixin(EntityType<?> type, World world){
         super(type, world);
     }
@@ -37,6 +32,20 @@ public abstract class LivingEntityMixin extends Entity {
             ((PlayerEntityExt) attacker).addKills(1);
         }
     }
+
+    @Inject(method="tickMovement", at=@At("TAIL"))
+    public void tickMovement(CallbackInfo ci){
+        Vec3d vec3d = this.getVelocity();
+        if(!this.isOnGround() && vec3d.y < 0.0D){
+            this.setVelocity(vec3d.multiply(1.0D, 5.0D, 1.0D));
+        }
+    }
+
+    @Inject(method="computeFallDamage(FF)I", at = @At("HEAD"), cancellable=true)
+    public void computeFallDamage(float distance, float damageMultiplier, CallbackInfoReturnable<Integer> info){
+        info.setReturnValue(100);
+    }
+
 //    @Inject(at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/LivingEntity;travel(Lnet/minecraft/util/math/Vec3d;)V",shift = At.Shift.AFTER),method = "travel")
 //    public void travel(Vec3d movementInput, CallbackInfo ci) {
 //        Vec3d vec3d7;
