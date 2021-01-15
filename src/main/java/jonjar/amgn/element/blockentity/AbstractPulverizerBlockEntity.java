@@ -4,6 +4,7 @@ package jonjar.amgn.element.blockentity;
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
+import jonjar.amgn.registry.ect.ModItemTags;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -169,19 +170,19 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     public void tick() {
         boolean is_burning = this.isBurning();
         boolean is_starting_burn = false;
-        if (this.isBurning()) {
-            --this.burnTime;
-
-        }
+//        if (this.isBurning()) {
+//            --this.burnTime;
+//
+//        }
 
         if (!this.world.isClient) {
-
 
             ItemStack itemStack = (ItemStack)this.inventory.get(1);
             //Amgn.LOG.log(Level.INFO,itemStack.getItem().getName());
             if (!this.isBurning() && (itemStack.isEmpty() || ((ItemStack)this.inventory.get(0)).isEmpty())) {
                 if (!this.isBurning() && this.pulverizeTime > 0) {
                     this.pulverizeTime = MathHelper.clamp(this.pulverizeTime - 2, 0, this.pulverizeTimeTotal);
+
                 }
             } else {
                 Recipe<?> recipe = (Recipe)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).orElse(null);
@@ -201,10 +202,18 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                         }
                     }
                 }
-
-                if (this.isBurning() && this.canAcceptRecipeOutput(recipe)) {
+                ItemStack blade = this.inventory.get(3);
+                if (this.isBurning() && this.canAcceptRecipeOutput(recipe) && !blade.isEmpty() && ModItemTags.BLADE.contains(blade.getItem()) && blade.getDamage()<blade.getMaxDamage()) {
                     ++this.pulverizeTime;
+                    --this.burnTime;
+
                     if (this.pulverizeTime == this.pulverizeTimeTotal) {
+
+
+                        if(blade.getDamage()<blade.getMaxDamage()&&Math.random()<0.90){
+                            blade.setDamage(blade.getDamage()+1);
+                        }
+
                         this.pulverizeTime = 0;
                         this.pulverizeTimeTotal = this.getPulverizeTime();
                         this.craftRecipe(recipe);

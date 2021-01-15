@@ -4,6 +4,7 @@ import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
 import jonjar.amgn.registry.ModBlocks;
 import jonjar.amgn.registry.ModFluids;
 import jonjar.amgn.registry.ModItems;
+import jonjar.amgn.registry.ect.ModItemTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -49,5 +50,6 @@ public class Amgn implements ModInitializer {
         ModBlocks.registerBlocks();//블럭 등록
         ModItems.registerItems();//아이템 등록
         PulverizerRecipeRegister.registerRecipes();
+        ModItemTags.register();
     }
 }

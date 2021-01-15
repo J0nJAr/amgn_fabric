@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "AWA",
+    "PGP"
+  ],
+  "key": {
+    "W": {
+      "item": "amgn:iron_blade"
+    },
+    "A": {
+      "item": "minecraft:smooth_stone"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "G": {
+      "item": "minecraft:stonecutter"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "amgn:pulverizer",
+    "count": 1
+    }
+}

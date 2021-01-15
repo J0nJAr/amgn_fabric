@@ -5,6 +5,7 @@ import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipe;
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
 import jonjar.amgn.registry.ModScreen;
+import jonjar.amgn.registry.ect.ModItemTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -112,13 +113,14 @@ public class PulverizerScreenHandler extends ScreenHandler {
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
+
             if (index == 2) {
-                if (!this.insertItem(itemStack2, 3, 39, true)) {
+                if (!this.insertItem(itemStack2, 4, 40, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onStackChanged(itemStack2, itemStack);
-            } else if (index != 1 && index != 0) {
+            } else if (index != 1 && index != 0 && index != 3) {
                 if (this.isSmeltable(itemStack2)) {
                     if (!this.insertItem(itemStack2, 0, 1, false)) {
                         return ItemStack.EMPTY;
@@ -127,14 +129,19 @@ public class PulverizerScreenHandler extends ScreenHandler {
                     if (!this.insertItem(itemStack2, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 3 && index < 30) {
+                } else if (ModItemTags.BLADE.contains(itemStack2.getItem())) {
+                    if (!this.insertItem(itemStack2, 3, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (index >= 4 && index < 31) {
                     if (!this.insertItem(itemStack2, 30, 39, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 30 && index < 39 && !this.insertItem(itemStack2, 3, 30, false)) {
+                } else if (index >= 31 && index < 40 && !this.insertItem(itemStack2, 4, 40, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(itemStack2, 3, 39, false)) {
+            } else if (!this.insertItem(itemStack2, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
 

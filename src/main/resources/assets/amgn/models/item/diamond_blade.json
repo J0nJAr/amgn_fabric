@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "amgn:item/ricecake_bucket"
+    "layer0": "amgn:item/diamond_blade"
   }
 }
