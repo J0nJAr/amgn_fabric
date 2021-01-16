@@ -92,7 +92,10 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
             float value = grow - shrink;
 
             // 계산식 : 2^value
-            return (float) Math.pow(2F, value);
+            if(value > 0)
+                return (float) 2F + value;
+            else
+                return (float) Math.pow(2F, value);
         } else {
             return 1F; // 기본 사이즈 = 1F
         }

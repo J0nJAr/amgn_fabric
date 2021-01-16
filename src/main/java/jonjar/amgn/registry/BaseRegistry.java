@@ -25,9 +25,8 @@ public abstract class BaseRegistry {
         public BaseRegistry getBaseRegistry(){
             return this.br;
         }
-
-
     }
+
     public static void registerAll(){
         for(REGISTRIES r : REGISTRIES.values())
             r.getBaseRegistry().register();

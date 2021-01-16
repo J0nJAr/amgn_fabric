@@ -29,7 +29,6 @@ public class ModFluids extends BaseRegistry{
         STILL_MOLTEN_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "molten_chocolate"), new ChocolateFluid.Still());
        FLOWING_CHOCOLATE = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_chocolate"), new ChocolateFluid.Flowing());
 
-
     }
 
 }
