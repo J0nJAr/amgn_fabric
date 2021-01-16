@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 
-public class ModItems {
+public class ModItems extends BaseRegistry {
 
     /*
     아이템 만들기
@@ -35,7 +35,7 @@ public class ModItems {
     /*
     아이템등록
      */
-    public static void registerItems(){
+    public void register(){
         CHOCOLATE_INGOT=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
         SLIME_INGOT= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
         WOOL_BOOTS = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"wool_boots"), new ArmorItem(ArmorMaterials.NETHERITE, EquipmentSlot.FEET, (new Item.Settings()).group(ItemGroup.COMBAT).fireproof()));

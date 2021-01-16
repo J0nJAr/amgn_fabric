@@ -1,7 +1,12 @@
 package jonjar.amgn.registry.ect;
 
+import jonjar.amgn.registry.BaseRegistry;
 import net.minecraft.item.FoodComponent;
 
-public class ModFoodComponents {
-    public static final FoodComponent RICECAKE = (new FoodComponent.Builder()).hunger(20).saturationModifier(0.6F).build();
+public class ModFoodComponents extends BaseRegistry {
+    public static FoodComponent RICECAKE;
+
+    public void register(){
+        RICECAKE = new FoodComponent.Builder().hunger(20).saturationModifier(0.6F).build();
+    }
 }

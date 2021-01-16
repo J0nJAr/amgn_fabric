@@ -1,10 +1,7 @@
 package jonjar.amgn;
 
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
-import jonjar.amgn.registry.ModBlocks;
-import jonjar.amgn.registry.ModFluids;
-import jonjar.amgn.registry.ModItems;
-import jonjar.amgn.registry.ect.ModItemTags;
+import jonjar.amgn.registry.BaseRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -16,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 
 public class Amgn implements ModInitializer {
+
+    // RESIZE REFERENCE : https://gitea.thebrokenrail.com/TheBrokenRail/GulliverReloaded
+
 
     public static final String MODID ="amgn";
 
@@ -66,10 +66,7 @@ public class Amgn implements ModInitializer {
 //        }
 
 
-        ModFluids.registryFluids();//액체 등록
-        ModBlocks.registerBlocks();//블럭 등록
-        ModItems.registerItems();//아이템 등록
+        BaseRegistry.registerAll();
         PulverizerRecipeRegister.registerRecipes();
-        ModItemTags.register();
     }
 }

@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 
-public class ModBlocks {
+public class ModBlocks extends BaseRegistry{
 
     /*
     블럭 만들기
@@ -67,7 +67,7 @@ public class ModBlocks {
     /*
     블럭 등록
      */
-    public static void registerBlocks(){
+    public void register(){
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);

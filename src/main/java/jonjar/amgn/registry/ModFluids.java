@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 
 
 
-public class ModFluids {
+public class ModFluids extends BaseRegistry{
 
     public static FlowableFluid STILL_MOLTEN_CHOCOLATE;
     public static FlowableFluid FLOWING_CHOCOLATE;
@@ -21,7 +21,7 @@ public class ModFluids {
 
 
 
-    public static void registryFluids()
+    public void register()
     {
         STILL_SLIME = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "molten_slime"), new SlimeFluid.Still());
         FLOWING_SLIME = Registry.register(Registry.FLUID, new Identifier(Amgn.MODID, "flowing_slime"), new SlimeFluid.Flowing());
