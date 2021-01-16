@@ -4,8 +4,13 @@
   "package": "jonjar.amgn.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CameraMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "EntityRenderDispatcherMixin",
     "GameOptionsMixin",
+    "InventoryScreenMixin",
     "LivingEntityMixin",
+    "LivingEntityRendererMixin",
     "PlayerEntityMixin"
   ],
   "client": [

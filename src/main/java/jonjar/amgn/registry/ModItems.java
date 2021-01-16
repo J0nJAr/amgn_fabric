@@ -17,7 +17,7 @@ public class ModItems extends BaseRegistry {
     //아이템
     public static Item CHOCOLATE_INGOT;
     public static Item SLIME_INGOT;
-    public static final Item RICECAKE_INGOT = new Item(new Item.Settings().group(Amgn.ITEM_GROUP).food(ModFoodComponents.RICECAKE));
+    public static Item RICECAKE_INGOT;
     public static Item IRON_BLADE;
     public static Item DIAMOND_BLADE;
     public static Item WOOL_BOOTS;
@@ -29,7 +29,7 @@ public class ModItems extends BaseRegistry {
     //블럭아이템
     public static BlockItem CHOCOLATE_BLOCK;
     public static BlockItem COMPRESSED_SLIME_BLOCK;
-    public static final BlockItem COMPRESSED_RICECAKE_BLOCK = new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP));
+    public static BlockItem COMPRESSED_RICECAKE_BLOCK;
     public static BlockItem PULVERIZER;
     public static BlockItem TEST;
     /*
@@ -40,8 +40,8 @@ public class ModItems extends BaseRegistry {
         SLIME_INGOT= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
         WOOL_BOOTS = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"wool_boots"), new ArmorItem(ArmorMaterials.NETHERITE, EquipmentSlot.FEET, (new Item.Settings()).group(ItemGroup.COMBAT).fireproof()));
 
-        Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"ricecake_ingot"), RICECAKE_INGOT);
-        Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);
+        RICECAKE_INGOT = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"ricecake_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP).food(ModFoodComponents.RICECAKE)));
+        COMPRESSED_RICECAKE_BLOCK = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_ricecake_block"), new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
 
         IRON_BLADE= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"iron_blade"), new Item(new Item.Settings().maxCount(1).maxDamage(328).group(Amgn.ITEM_GROUP)));
         DIAMOND_BLADE= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new Item(new Item.Settings().maxCount(1).maxDamage(328).group(Amgn.ITEM_GROUP)));

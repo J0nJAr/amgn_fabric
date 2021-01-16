@@ -66,7 +66,8 @@ public class Amgn implements ModInitializer {
 //        }
 
 
-        BaseRegistry.registerAll();
         PulverizerRecipeRegister.registerRecipes();
+
+        BaseRegistry.registerAll();
     }
 }

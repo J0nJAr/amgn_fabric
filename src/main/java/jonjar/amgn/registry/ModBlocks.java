@@ -24,15 +24,7 @@ public class ModBlocks extends BaseRegistry{
     /*
     블럭 만들기
      */
-    public static final Block CHOCOLATE_BLOCK = new ChocolateBlock(FabricBlockSettings
-            .of(Material.METAL)
-            .breakByTool(FabricToolTags.PICKAXES,0)
-            //.requiresTool()
-            .strength(0.75f,8.0f)
-            .sounds(BlockSoundGroup.METAL)
-            .ticksRandomly()
-            //luminance()
-    );
+    public static Block CHOCOLATE_BLOCK;
 
     public static final Block COMPRESSED_SLIME_BLOCK = new CompressedSlimeBlock(FabricBlockSettings
             .of(Material.ORGANIC_PRODUCT)
@@ -43,21 +35,9 @@ public class ModBlocks extends BaseRegistry{
             .slipperiness(0.6f)
     );
 
-    public static final Block COMPRESSED_RICECAKE_BLOCK = new CompressedRicecakeBlock(FabricBlockSettings
-            .of(Material.CAKE)
-            .breakByTool(FabricToolTags.SHOVELS, 0)
-            .breakByHand(true)
-            .strength(0.5f, 5f)
-            .sounds(BlockSoundGroup.WOOL)
-            .nonOpaque());
+    public static Block COMPRESSED_RICECAKE_BLOCK;
 
-    public static final Block TEST = new test(FabricBlockSettings
-            .of(Material.CAKE)
-            .breakByTool(FabricToolTags.SHOVELS, 0)
-            .breakByHand(true)
-            .strength(0.5f, 5f)
-            .sounds(BlockSoundGroup.WOOL)
-            .nonOpaque());
+    public static Block TEST;
 
     public static Block MOLTEN_CHOCOLATE;
     public static Block MOLTEN_SLIME;
@@ -68,6 +48,34 @@ public class ModBlocks extends BaseRegistry{
     블럭 등록
      */
     public void register(){
+
+
+        CHOCOLATE_BLOCK = new ChocolateBlock(FabricBlockSettings
+                .of(Material.METAL)
+                .breakByTool(FabricToolTags.PICKAXES,0)
+                //.requiresTool()
+                .strength(0.75f,8.0f)
+                .sounds(BlockSoundGroup.METAL)
+                .ticksRandomly()
+                //luminance()
+        );
+
+        COMPRESSED_RICECAKE_BLOCK = new CompressedRicecakeBlock(FabricBlockSettings
+                .of(Material.CAKE)
+                .breakByTool(FabricToolTags.SHOVELS, 0)
+                .breakByHand(true)
+                .strength(0.5f, 5f)
+                .sounds(BlockSoundGroup.WOOL)
+                .nonOpaque());
+
+        TEST = new test(FabricBlockSettings
+                .of(Material.CAKE)
+                .breakByTool(FabricToolTags.SHOVELS, 0)
+                .breakByHand(true)
+                .strength(0.5f, 5f)
+                .sounds(BlockSoundGroup.WOOL)
+                .nonOpaque());
+
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"chocolate_block"), CHOCOLATE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_slime_block"), COMPRESSED_SLIME_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID,"compressed_ricecake_block"), COMPRESSED_RICECAKE_BLOCK);

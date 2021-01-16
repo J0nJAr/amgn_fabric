@@ -7,13 +7,14 @@ import jonjar.amgn.registry.ect.ModItemTags;
 public abstract class BaseRegistry {
 
     public enum REGISTRIES {
-        ITEM(new ModItems()),
         FLUID(new ModFluids()),
         BLOCK(new ModBlocks()),
         ITEM_TAG(new ModItemTags()),
         FOOD_COMPONENT(new ModFoodComponents()),
+        ITEM(new ModItems()),
         FEATURE(new ModFeatures()),
-        STATUS_EFFECT(new ModScreen());
+        SCREEN(new ModScreen()),
+        STATUS_EFFECT(new ModStatusEffects());
 
         private final BaseRegistry br;
 
