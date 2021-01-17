@@ -14,5 +14,7 @@
 
   "container.pulverizer" : "Pulverizer",
 
-  "itemGroup.amgn.general" : "AMGN"
+  "itemGroup.amgn.general" : "AMGN",
+
+  "options.amgn": "NDS Option"
 }

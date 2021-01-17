@@ -16,6 +16,7 @@ public class Amgn implements ModInitializer {
 
     // RESIZE REFERENCE : https://gitea.thebrokenrail.com/TheBrokenRail/GulliverReloaded
 
+    public static boolean TOGGLED_GRAVITY = false;
 
     public static final String MODID ="amgn";
 

@@ -1,5 +1,6 @@
 package jonjar.amgn.mixin;
 
+import jonjar.amgn.Amgn;
 import jonjar.amgn.entity.PlayerEntityExt;
 import jonjar.amgn.entity.ResizedEntity;
 import jonjar.amgn.registry.ModStatusEffects;
@@ -53,13 +54,15 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     public void tickMovement(CallbackInfo ci){
         Vec3d vec3d = this.getVelocity();
         if(!this.isOnGround() && vec3d.y < 0.0D){
-            this.setVelocity(vec3d.multiply(1.0D, 5.0D, 1.0D));
+            if(Amgn.TOGGLED_GRAVITY)
+                this.setVelocity(vec3d.multiply(1.0D, 5.0D, 1.0D));
         }
     }
 
     @Inject(method="computeFallDamage(FF)I", at = @At("HEAD"), cancellable=true)
     public void computeFallDamage(float distance, float damageMultiplier, CallbackInfoReturnable<Integer> info){
-        info.setReturnValue(100);
+        if(Amgn.TOGGLED_GRAVITY)
+            info.setReturnValue(100);
     }
 
 
