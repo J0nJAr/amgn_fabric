@@ -14,11 +14,13 @@ import net.minecraft.util.registry.Registry;
 public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> implements RecipeSerializer<T> {
 
     private final int pulverizeTime;
+    private final int level;
     private final PulverizerRecipeSerializer.RecipeFactory<T> recipeFactory;
 
-    public PulverizerRecipeSerializer(PulverizerRecipeSerializer.RecipeFactory<T> recipeFactory, int pulverizeTime) {
+    public PulverizerRecipeSerializer(PulverizerRecipeSerializer.RecipeFactory<T> recipeFactory, int pulverizeTime,int level) {
         this.pulverizeTime = pulverizeTime;
         this.recipeFactory = recipeFactory;
+        this.level = level;
     }
 
     @Override
@@ -33,7 +35,9 @@ public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> impl
         }));
         float f = JsonHelper.getFloat(jsonObject, "experience", 0.0F);
         int i = JsonHelper.getInt(jsonObject, "pulverizetime", this.pulverizeTime);
-        return this.recipeFactory.create(identifier, string, ingredient, itemStack, f, i);
+        int l = JsonHelper.getInt(jsonObject, "level", this.level);
+
+        return this.recipeFactory.create(identifier, string, ingredient, itemStack, f, i,l);
     }
 
     public T read(Identifier identifier, PacketByteBuf packetByteBuf) {
@@ -42,7 +46,10 @@ public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> impl
         ItemStack itemStack = packetByteBuf.readItemStack();
         float f = packetByteBuf.readFloat();
         int i = packetByteBuf.readVarInt();
-        return this.recipeFactory.create(identifier, string, ingredient, itemStack, f, i);
+
+        int l = packetByteBuf.readVarInt();
+
+        return this.recipeFactory.create(identifier, string, ingredient, itemStack, f, i, l);
     }
 
 
@@ -55,6 +62,6 @@ public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> impl
     }
 
     interface RecipeFactory<T extends AbstractPulverizerRecipe> {
-        T create(Identifier id, String group, Ingredient input, ItemStack output, float experience, int cookTime);
+        T create(Identifier id, String group, Ingredient input, ItemStack output, float experience, int cookTime,int level);
     }
 }

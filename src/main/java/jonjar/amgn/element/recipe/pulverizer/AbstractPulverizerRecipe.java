@@ -20,8 +20,9 @@ public abstract class AbstractPulverizerRecipe implements Recipe<Inventory> {
     protected final ItemStack output;
     protected final float experience;
     protected final int pulverizeTime;
+    protected final int level;
 
-    public AbstractPulverizerRecipe(RecipeType<?> type, Identifier id, String group, Ingredient input, ItemStack output, float experience, int pulverizeTime) {
+    public AbstractPulverizerRecipe(RecipeType<?> type, Identifier id, String group, Ingredient input, ItemStack output, float experience, int pulverizeTime,int level) {
         this.type = type;
         this.id = id;
         this.group = group;
@@ -29,6 +30,7 @@ public abstract class AbstractPulverizerRecipe implements Recipe<Inventory> {
         this.output = output;
         this.experience = experience;
         this.pulverizeTime = pulverizeTime;
+        this.level = level;
     }
 
     public boolean matches(Inventory inv, World world) {

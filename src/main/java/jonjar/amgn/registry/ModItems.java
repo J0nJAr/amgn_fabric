@@ -47,7 +47,8 @@ public class ModItems extends BaseRegistry {
 
         IRON_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"iron_blade"), new BladeItem(2,1,new Item.Settings().maxCount(16).maxDamage(64).group(Amgn.ITEM_GROUP)));
         DIAMOND_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new BladeItem(4,2,new Item.Settings().maxCount(16).maxDamage(256).group(Amgn.ITEM_GROUP)));
-        GOLD_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new BladeItem(8,0,new Item.Settings().maxCount(16).maxDamage(32).group(Amgn.ITEM_GROUP)));
+        GOLD_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"gold_blade"), new BladeItem(8,0,new Item.Settings().maxCount(16).maxDamage(32).group(Amgn.ITEM_GROUP)));
+
         CHOCOLATE_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_block"), new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
         COMPRESSED_SLIME_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_slime_block"), new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
 

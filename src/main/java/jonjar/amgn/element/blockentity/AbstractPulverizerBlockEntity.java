@@ -3,6 +3,7 @@ package jonjar.amgn.element.blockentity;
 
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import jonjar.amgn.element.item.BladeItem;
 import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import jonjar.amgn.registry.ModItems;
 import jonjar.amgn.registry.etc.ModItemTags;
@@ -207,7 +208,9 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                 }
                 ItemStack blade = this.inventory.get(3);
                 if (this.isBurning() && this.canAcceptRecipeOutput(recipe) && !blade.isEmpty() && ModItemTags.BLADE.contains(blade.getItem()) && blade.getDamage()<blade.getMaxDamage()) {
-                    int modifier = getModifier(blade);
+                    int modifier = ((BladeItem) blade.getItem()).getModifier();
+
+
 
                     this.pulverizeTime+=modifier;
                     --this.burnTime;
