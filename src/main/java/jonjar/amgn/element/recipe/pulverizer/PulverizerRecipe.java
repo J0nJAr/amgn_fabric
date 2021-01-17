@@ -10,8 +10,8 @@ import net.minecraft.util.Identifier;
 
 public class PulverizerRecipe extends AbstractPulverizerRecipe {
 
-    public PulverizerRecipe(Identifier id, String group, Ingredient input, ItemStack output, float experience, int cookTime) {
-        super(PulverizerRecipeRegister.PULVERIZE_RECIPE_TYPE, id, group, input, output, experience, cookTime);
+    public PulverizerRecipe(Identifier id, String group, Ingredient input, ItemStack output, float experience, int pulverizeTime) {
+        super(PulverizerRecipeRegister.PULVERIZE_RECIPE_TYPE, id, group, input, output, experience, pulverizeTime);
     }
 
     @Environment(EnvType.CLIENT)

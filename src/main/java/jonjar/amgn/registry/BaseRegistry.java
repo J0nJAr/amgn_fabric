@@ -1,8 +1,8 @@
 package jonjar.amgn.registry;
 
-import jonjar.amgn.registry.ect.ModFeatures;
-import jonjar.amgn.registry.ect.ModFoodComponents;
-import jonjar.amgn.registry.ect.ModItemTags;
+import jonjar.amgn.registry.etc.ModFeatures;
+import jonjar.amgn.registry.etc.ModFoodComponents;
+import jonjar.amgn.registry.etc.ModItemTags;
 
 public abstract class BaseRegistry {
 

@@ -1,3 +1,4 @@
+
 package jonjar.amgn.base;
 
 import net.minecraft.entity.effect.StatusEffect;

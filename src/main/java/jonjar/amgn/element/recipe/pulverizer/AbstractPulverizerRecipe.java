@@ -21,14 +21,14 @@ public abstract class AbstractPulverizerRecipe implements Recipe<Inventory> {
     protected final float experience;
     protected final int pulverizeTime;
 
-    public AbstractPulverizerRecipe(RecipeType<?> type, Identifier id, String group, Ingredient input, ItemStack output, float experience, int cookTime) {
+    public AbstractPulverizerRecipe(RecipeType<?> type, Identifier id, String group, Ingredient input, ItemStack output, float experience, int pulverizeTime) {
         this.type = type;
         this.id = id;
         this.group = group;
         this.input = input;
         this.output = output;
         this.experience = experience;
-        this.pulverizeTime = cookTime;
+        this.pulverizeTime = pulverizeTime;
     }
 
     public boolean matches(Inventory inv, World world) {

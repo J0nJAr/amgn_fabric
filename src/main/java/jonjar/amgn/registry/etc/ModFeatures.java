@@ -1,4 +1,4 @@
-package jonjar.amgn.registry.ect;
+package jonjar.amgn.registry.etc;
 
 import jonjar.amgn.registry.BaseRegistry;
 

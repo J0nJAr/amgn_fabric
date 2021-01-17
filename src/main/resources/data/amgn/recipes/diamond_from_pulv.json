@@ -4,5 +4,6 @@
     "item": "minecraft:stone"
   },
   "result": "minecraft:diamond",
+  "pulverizetime": 200,
   "experience": 0.2
 }

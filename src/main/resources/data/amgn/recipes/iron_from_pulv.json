@@ -1,0 +1,9 @@
+{
+  "type": "amgn:pulverize",
+  "ingredient": {
+    "item": "minecraft:iron_ore"
+  },
+  "result": "minecraft:iron_ingot",
+  "pulverizetime": 100,
+  "experience": 0.2
+}

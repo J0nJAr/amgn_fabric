@@ -32,7 +32,7 @@ public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> impl
             return new IllegalStateException("Item: " + string2 + " does not exist");
         }));
         float f = JsonHelper.getFloat(jsonObject, "experience", 0.0F);
-        int i = JsonHelper.getInt(jsonObject, "pulverizeTime", this.pulverizeTime);
+        int i = JsonHelper.getInt(jsonObject, "pulverizetime", this.pulverizeTime);
         return this.recipeFactory.create(identifier, string, ingredient, itemStack, f, i);
     }
 

@@ -5,7 +5,7 @@ import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipe;
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
 import jonjar.amgn.registry.ModScreen;
-import jonjar.amgn.registry.ect.ModItemTags;
+import jonjar.amgn.registry.etc.ModItemTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,6 +30,59 @@ public class PulverizerScreenHandler extends ScreenHandler {
     protected final World world;
     private final RecipeType<? extends AbstractPulverizerRecipe> recipeType;
 
+    static class BladeSlot extends Slot {
+        public BladeSlot(Inventory inventory, int i, int j, int k) {
+            super(inventory, i, j, k);
+        }
+
+        public boolean canInsert(ItemStack stack) {
+            return ModItemTags.BLADE.contains(stack.getItem());
+        }
+
+        public int getMaxItemCount() {
+            return 1;
+        }
+    }
+    static class OutSlot extends Slot {
+        private final PlayerEntity player;
+        private int amount;
+
+        public OutSlot(PlayerEntity player, Inventory inventory, int index, int x, int y) {
+            super(inventory, index, x, y);
+            this.player = player;
+        }
+
+        public boolean canInsert(ItemStack stack) {
+            return false;
+        }
+
+        public ItemStack takeStack(int amount) {
+            if (this.hasStack()) {
+                this.amount += Math.min(amount, this.getStack().getCount());
+            }
+
+            return super.takeStack(amount);
+        }
+
+        public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
+            this.onCrafted(stack);
+            super.onTakeItem(player, stack);
+            return stack;
+        }
+
+        protected void onCrafted(ItemStack stack, int amount) {
+            this.amount += amount;
+            this.onCrafted(stack);
+        }
+
+        protected void onCrafted(ItemStack stack) {
+            stack.onCraft(this.player.world, this.player, this.amount);
+            this.amount = 0;
+        }
+
+
+    }
+
     protected PulverizerScreenHandler(ScreenHandlerType<PulverizerScreenHandler> type, RecipeType<PulverizerRecipe> recipeType, int i, PlayerInventory playerInventory) {
         this(type, recipeType, i, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
     }
@@ -44,8 +97,8 @@ public class PulverizerScreenHandler extends ScreenHandler {
         this.world = playerInventory.player.world;
         this.addSlot(new Slot(inventory, 0, 56, 17));
         this.addSlot(new Slot(inventory, 1, 56, 53));
-        this.addSlot(new Slot(inventory, 2, 116, 35));
-        this.addSlot(new Slot(inventory, 3, 20, 35));
+        this.addSlot(new OutSlot(playerInventory.player, inventory, 2, 116, 35));
+        this.addSlot(new BladeSlot(inventory, 3, 20, 35));
 
         int l;
         for(l = 0; l < 3; ++l) {

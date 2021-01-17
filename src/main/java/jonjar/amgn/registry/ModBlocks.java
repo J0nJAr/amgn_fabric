@@ -85,7 +85,7 @@ public class ModBlocks extends BaseRegistry{
         MOLTEN_CHOCOLATE = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "molten_chocolate"), new FluidBlock(ModFluids.STILL_MOLTEN_CHOCOLATE, FabricBlockSettings.copy(Blocks.WATER)){});
 
 
-        PULVERIZER_BLOCK = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "pulverizer"), new PulverizerBlock(FabricBlockSettings.of(Material.METAL)));
+        PULVERIZER_BLOCK = Registry.register(Registry.BLOCK, new Identifier(Amgn.MODID, "pulverizer"), new PulverizerBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES,2).strength(0.75F,5f)));
         PULVERIZER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Amgn.MODID, "pulverizer"), BlockEntityType.Builder.create(PulverizerBlockEntity::new, PULVERIZER_BLOCK).build(null));
     }
 }

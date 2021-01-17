@@ -1,7 +1,8 @@
 package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
-import jonjar.amgn.registry.ect.ModFoodComponents;
+import jonjar.amgn.element.item.BladeItem;
+import jonjar.amgn.registry.etc.ModFoodComponents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -20,6 +21,7 @@ public class ModItems extends BaseRegistry {
     public static Item RICECAKE_INGOT;
     public static Item IRON_BLADE;
     public static Item DIAMOND_BLADE;
+    public static Item GOLD_BLADE;
     public static Item WOOL_BOOTS;
 
     // 양동이
@@ -43,9 +45,9 @@ public class ModItems extends BaseRegistry {
         RICECAKE_INGOT = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"ricecake_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP).food(ModFoodComponents.RICECAKE)));
         COMPRESSED_RICECAKE_BLOCK = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_ricecake_block"), new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
 
-        IRON_BLADE= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"iron_blade"), new Item(new Item.Settings().maxCount(1).maxDamage(328).group(Amgn.ITEM_GROUP)));
-        DIAMOND_BLADE= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new Item(new Item.Settings().maxCount(1).maxDamage(328).group(Amgn.ITEM_GROUP)));
-
+        IRON_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"iron_blade"), new BladeItem(2,1,new Item.Settings().maxCount(16).maxDamage(64).group(Amgn.ITEM_GROUP)));
+        DIAMOND_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new BladeItem(4,2,new Item.Settings().maxCount(16).maxDamage(256).group(Amgn.ITEM_GROUP)));
+        GOLD_BLADE = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"diamond_blade"), new BladeItem(8,0,new Item.Settings().maxCount(16).maxDamage(32).group(Amgn.ITEM_GROUP)));
         CHOCOLATE_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_block"), new BlockItem(ModBlocks.CHOCOLATE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
         COMPRESSED_SLIME_BLOCK=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_slime_block"), new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));
 

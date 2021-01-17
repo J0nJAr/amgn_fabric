@@ -4,7 +4,8 @@ package jonjar.amgn.element.blockentity;
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import jonjar.amgn.element.recipe.pulverizer.AbstractPulverizerRecipe;
-import jonjar.amgn.registry.ect.ModItemTags;
+import jonjar.amgn.registry.ModItems;
+import jonjar.amgn.registry.etc.ModItemTags;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -49,6 +50,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     protected final PropertyDelegate propertyDelegate;
     private final Object2IntOpenHashMap<Identifier> recipesUsed;
     protected final RecipeType<? extends AbstractPulverizerRecipe> recipeType;
+
+
 
     protected AbstractPulverizerBlockEntity(BlockEntityType<?> blockEntityType, RecipeType<? extends AbstractPulverizerRecipe> recipeType) {
         super(blockEntityType);
@@ -168,7 +171,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     }
 
     public void tick() {
-        boolean is_burning = this.isBurning();
+        boolean is_processing = (pulverizeTime>0);
         boolean is_starting_burn = false;
 //        if (this.isBurning()) {
 //            --this.burnTime;
@@ -182,7 +185,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
             if (!this.isBurning() && (itemStack.isEmpty() || ((ItemStack)this.inventory.get(0)).isEmpty())) {
                 if (!this.isBurning() && this.pulverizeTime > 0) {
                     this.pulverizeTime = MathHelper.clamp(this.pulverizeTime - 2, 0, this.pulverizeTimeTotal);
-
+                    this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.ISON, this.pulverizeTime > 0), 3);
                 }
             } else {
                 Recipe<?> recipe = (Recipe)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).orElse(null);
@@ -204,10 +207,12 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                 }
                 ItemStack blade = this.inventory.get(3);
                 if (this.isBurning() && this.canAcceptRecipeOutput(recipe) && !blade.isEmpty() && ModItemTags.BLADE.contains(blade.getItem()) && blade.getDamage()<blade.getMaxDamage()) {
-                    ++this.pulverizeTime;
+                    int modifier = getModifier(blade);
+
+                    this.pulverizeTime+=modifier;
                     --this.burnTime;
 
-                    if (this.pulverizeTime == this.pulverizeTimeTotal) {
+                    if (this.pulverizeTime >= this.pulverizeTimeTotal) {
 
 
                         if(blade.getDamage()<blade.getMaxDamage()&&Math.random()<0.90){
@@ -221,13 +226,14 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                     }
                 } else {
                     this.pulverizeTime = 0;
+                    this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.ISON, this.pulverizeTime>0), 3);
                 }
             }
 
-            if (is_burning != this.isBurning()) {
-                //Amgn.LOG.log(Level.INFO,this.burnTime+"   "+is_burning);
+            if (is_processing != pulverizeTime>0) {
+                //Amgn.LOG.log(Level.INFO,is_processing+"   "+is_processing);
                 is_starting_burn = true;
-                this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.ISON, this.isBurning()), 3);
+                this.world.setBlockState(this.pos, (BlockState)this.world.getBlockState(this.pos).with(PulverizerBlock.ISON, this.pulverizeTime>0), 3);
 
             }
         }
@@ -236,6 +242,22 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
             this.markDirty();
         }
 
+    }
+
+    public int getModifier(ItemStack is){
+        return getModifier(is.getItem());
+    }
+    public int getModifier(Item i){
+        int modifier= 1;
+
+        if (ModItems.IRON_BLADE.equals(i)) {
+            modifier = 2;
+        }else if (ModItems.DIAMOND_BLADE.equals(i)) {
+            modifier = 4;
+        }else if (ModItems.GOLD_BLADE.equals(i)) {
+            modifier = 8;
+        }
+        return modifier;
     }
 
     protected boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe) {
@@ -308,7 +330,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         }
     }
 
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+    public boolean
+    canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
         return this.isValid(slot, stack);
     }
 
@@ -378,14 +401,20 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         }
     }
 
+
     public boolean isValid(int slot, ItemStack stack) {
+
         if (slot == 2) {
             return false;
-        } else if (slot != 1) {
+        }
+        else if (slot == 3){
+            return ModItemTags.BLADE.contains(stack.getItem());
+        }
+        else if (slot != 1) {
             return true;
         } else {
             ItemStack itemStack = (ItemStack)this.inventory.get(1);
-            return canUseAsFuel(stack) || stack.getItem() == Items.BUCKET && itemStack.getItem() != Items.BUCKET;
+            return canUseAsFuel(stack);
         }
     }
 
