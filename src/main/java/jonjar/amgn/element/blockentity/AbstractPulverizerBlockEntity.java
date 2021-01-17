@@ -48,6 +48,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
     private int fuelTime=0;
     private int pulverizeTime=0;
     private int pulverizeTimeTotal=0;
+    private int level;
     protected final PropertyDelegate propertyDelegate;
     private final Object2IntOpenHashMap<Identifier> recipesUsed;
     protected final RecipeType<? extends AbstractPulverizerRecipe> recipeType;
@@ -68,6 +69,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                         return AbstractPulverizerBlockEntity.this.pulverizeTime;
                     case 3:
                         return AbstractPulverizerBlockEntity.this.pulverizeTimeTotal;
+                    case 4:
+                        return AbstractPulverizerBlockEntity.this.level;
                     default:
                         return 0;
                 }
@@ -86,6 +89,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                         break;
                     case 3:
                         AbstractPulverizerBlockEntity.this.pulverizeTimeTotal = value;
+                    case 4:
+                        AbstractPulverizerBlockEntity.this.level= value;
                 }
 
             }
@@ -146,6 +151,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         this.burnTime = tag.getShort("BurnTime");
         this.pulverizeTime = tag.getShort("pulverizeTime");
         this.pulverizeTimeTotal = tag.getShort("pulverizeTimeTotal");
+        this.level = tag.getShort("level");
         this.fuelTime = this.getFuelTime((ItemStack)this.inventory.get(1));
         CompoundTag compoundTag = tag.getCompound("RecipesUsed");
         Iterator var4 = compoundTag.getKeys().iterator();
@@ -162,6 +168,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
         tag.putShort("BurnTime", (short)this.burnTime);
         tag.putShort("pulverizeTime", (short)this.pulverizeTime);
         tag.putShort("pulverizeTimeTotal", (short)this.pulverizeTimeTotal);
+        tag.putShort("level", (short)this.level);
+
         Inventories.toTag(tag, this.inventory);
         CompoundTag compoundTag = new CompoundTag();
         this.recipesUsed.forEach((identifier, integer) -> {
@@ -207,7 +215,8 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
                     }
                 }
                 ItemStack blade = this.inventory.get(3);
-                if (this.isBurning() && this.canAcceptRecipeOutput(recipe) && !blade.isEmpty() && ModItemTags.BLADE.contains(blade.getItem()) && blade.getDamage()<blade.getMaxDamage()) {
+
+                if (this.isBurning() && this.canAcceptRecipeOutput(recipe) && !blade.isEmpty() && ModItemTags.BLADE.contains(blade.getItem()) && blade.getDamage()<blade.getMaxDamage()&&((BladeItem) blade.getItem()).getLevel()>=getLevel()) {
                     int modifier = ((BladeItem) blade.getItem()).getModifier();
 
 
@@ -319,6 +328,10 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
 
     protected int getPulverizeTime() {
         return (Integer)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).map(AbstractPulverizerRecipe::getPulverizeTime).orElse(200);
+    }
+
+    protected int getLevel(){
+        return (Integer)this.world.getRecipeManager().getFirstMatch(this.recipeType, this, this.world).map(AbstractPulverizerRecipe::getLevel).orElse(0);
     }
 
     public static boolean canUseAsFuel(ItemStack stack) {

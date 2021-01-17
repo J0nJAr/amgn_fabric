@@ -69,6 +69,10 @@ public abstract class AbstractPulverizerRecipe implements Recipe<Inventory> {
         return this.pulverizeTime;
     }
 
+    public int getLevel(){
+        return this.level;
+    }
+
     public Identifier getId() {
         return this.id;
     }
