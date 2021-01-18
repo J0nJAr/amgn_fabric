@@ -194,7 +194,7 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
                     t=0.6f;
                     break;
                 }else if(is.getItem() instanceof SlipperyArmor) {
-                    t=1.3f;
+                    t= t >0.7f ? 1.0989011f : 0.99f;
                     break;
                 }
 
