@@ -145,8 +145,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo info){
+        float scale = computeScale();
         if(!this.getEntityWorld().isClient()){
-            float scale = computeScale();
             if(this.getDataTracker().get(SCALE) != scale){
                 this.getDataTracker().set(SCALE, computeScale());
             }
@@ -160,6 +160,9 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
         ea.addPersistentModifier(new EntityAttributeModifier(SCALED_SPEED_ID,
                 "Resized speed multiplier",
                 Math.pow(getScale(), 0.4) - 1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+
+        if(scale / 2F != this.stepHeight)
+            this.stepHeight = scale/ 2F;
     }
 
     // TODO : DataTracker = 서버 종료 후에도 저장되는 값?
