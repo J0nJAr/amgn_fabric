@@ -1,5 +1,6 @@
 package jonjar.amgn.registry;
 
+import jonjar.amgn.registry.etc.ModDynamicRecipes;
 import jonjar.amgn.registry.etc.ModFeatures;
 import jonjar.amgn.registry.etc.ModFoodComponents;
 import jonjar.amgn.registry.etc.ModItemTags;
@@ -14,7 +15,8 @@ public abstract class BaseRegistry {
         ITEM(new ModItems()),
         FEATURE(new ModFeatures()),
         SCREEN(new ModScreen()),
-        STATUS_EFFECT(new ModStatusEffects());
+        STATUS_EFFECT(new ModStatusEffects()),
+        DYNAMIC_RECIPE(new ModDynamicRecipes());
 
         private final BaseRegistry br;
 

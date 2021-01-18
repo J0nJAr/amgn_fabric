@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +31,8 @@ public class Amgn implements ModInitializer {
             new Identifier(MODID, "armor"),
             () -> new ItemStack(ModItems.ICE_BOOTS)
     );
+    public static World world;
+
     @Override
     public void onInitialize() {
 
@@ -68,6 +71,7 @@ public class Amgn implements ModInitializer {
 //            }
 //
 //        }
+
 
 
         PulverizerRecipeRegister.registerRecipes();
