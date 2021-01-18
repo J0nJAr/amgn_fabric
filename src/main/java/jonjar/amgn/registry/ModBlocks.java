@@ -32,7 +32,7 @@ public class ModBlocks extends BaseRegistry{
             .strength(0.75f, 8.0f)
             .sounds(BlockSoundGroup.SLIME)
             .nonOpaque()
-            .slipperiness(0.6f)
+            .slipperiness(0.9f)
     );
 
     public static Block COMPRESSED_RICECAKE_BLOCK;

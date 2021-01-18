@@ -11,6 +11,6 @@ public class ModItemTags extends BaseRegistry {
     public static Tag<Item> BLADE;
 
     public void register(){
-        BLADE = TagRegistry.item(new Identifier(Amgn.MODID,"blade"));
+        BLADE = TagRegistry.item(new Identifier(Amgn.MODID,"pulvblade"));
     }
 }

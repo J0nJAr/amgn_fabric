@@ -1,27 +1,54 @@
 package jonjar.amgn.element.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SlimeBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class CompressedSlimeBlock extends SlimeBlock {
+public class CompressedSlimeBlock extends Block {
 
-    public CompressedSlimeBlock(Settings settings){
+    public CompressedSlimeBlock(Settings settings) {
         super(settings);
     }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(!world.isClient){
-            player.sendMessage(new LiteralText("Hello, World!"), false);
+    public void onLandedUpon(World world, BlockPos pos, Entity entity, float distance) {
+        if (entity.bypassesLandingEffects()) {
+            super.onLandedUpon(world, pos, entity, distance);
+        } else {
+            entity.handleFallDamage(distance, 0.1F);
         }
 
-        return ActionResult.SUCCESS;
     }
+
+    public void onEntityLand(BlockView world, Entity entity) {
+        if (entity.bypassesLandingEffects()) {
+            super.onEntityLand(world, entity);
+        } else {
+            this.bounce(entity);
+        }
+
+    }
+
+    private void bounce(Entity entity) {
+        Vec3d vec3d = entity.getVelocity();
+        if (vec3d.y < 0.0D) {
+            double d = entity instanceof LivingEntity ? 1.0D : 0.8D;
+            entity.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
+        }
+
+    }
+
+    public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+        double d = Math.abs(entity.getVelocity().y);
+        if (d < 0.1D && !entity.bypassesSteppingEffects()) {
+            double e = 0.4D + d * 0.2D;
+            entity.setVelocity(entity.getVelocity().multiply(e, 1.0D, e));
+        }
+
+        super.onSteppedOn(world, pos, entity);
+    }
+
 }

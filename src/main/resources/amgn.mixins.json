@@ -4,17 +4,17 @@
   "package": "jonjar.amgn.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CameraMixin",
-    "ClientPlayerInteractionManagerMixin",
-    "EntityRenderDispatcherMixin",
     "GameOptionsMixin",
-    "InventoryScreenMixin",
-    "LivingEntityMixin",
-    "LivingEntityRendererMixin",
     "OptionScreenMixin",
+    "LivingEntityMixin",
     "PlayerEntityMixin"
   ],
   "client": [
+    "CameraMixin",
+    "InventoryScreenMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "EntityRenderDispatcherMixin",
+    "LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,9 +1,12 @@
 package jonjar.amgn.mixin;
 
 import jonjar.amgn.Amgn;
+import jonjar.amgn.element.item.AntiSlipperyArmor;
+import jonjar.amgn.element.item.SlipperyArmor;
 import jonjar.amgn.entity.PlayerEntityExt;
 import jonjar.amgn.entity.ResizedEntity;
 import jonjar.amgn.registry.ModStatusEffects;
+import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -27,6 +30,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -72,6 +76,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
 
     @Shadow public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
+
+    @Shadow public abstract void equipStack(EquipmentSlot slot, ItemStack stack);
 
     @Unique
     private static final UUID SCALED_SPEED_ID = UUID.fromString("c5267238-6a78-4257-ae83-a2a5e34c1128");
@@ -174,19 +180,23 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
         cir.setReturnValue(cir.getReturnValue() * getScale());
     }
 
-//    @Inject(at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/LivingEntity;travel(Lnet/minecraft/util/math/Vec3d;)V",shift = At.Shift.AFTER),method = "travel")
-//    public void travel(Vec3d movementInput, CallbackInfo ci) {
-//        Vec3d vec3d7;
-//        BlockPos blockPos = this.getVelocityAffectingPos();
-//
-//        float t = this.world.getBlockState(blockPos).getBlock().getSlipperiness();
-//        if((Object)this instanceof PlayerEntity){
-//            PlayerEntity pe = (PlayerEntity) (Object) this;
-//            for (ItemStack is : pe.getArmorItems()){
-//                if(is.getItem() instanceof AntiSlipperyArmor) {
-//                    t=1.0f;
-//                }
-//            }
-//        }
-//    }
+    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getSlipperiness()F"))
+    public float antiSlippery(Block block) {
+        float t = block.getSlipperiness();
+
+        if((Object)this instanceof PlayerEntity){
+            PlayerEntity pe = (PlayerEntity) (Object) this;
+            for (ItemStack is : pe.getArmorItems()){
+                if(is.getItem() instanceof AntiSlipperyArmor) {
+                    t=0.6f;
+                    break;
+                }else if(is.getItem() instanceof SlipperyArmor) {
+                    t= t >0.7f ? 1.0989011f : 0.99f;
+                    break;
+                }
+
+            }
+        }
+        return t;
+    }
 }

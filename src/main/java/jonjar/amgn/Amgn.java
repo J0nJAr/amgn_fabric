@@ -2,11 +2,11 @@ package jonjar.amgn;
 
 import jonjar.amgn.element.recipe.pulverizer.PulverizerRecipeRegister;
 import jonjar.amgn.registry.BaseRegistry;
+import jonjar.amgn.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +24,12 @@ public class Amgn implements ModInitializer {
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(
             new Identifier(MODID, "general"),
-            () -> new ItemStack(Items.SEA_LANTERN)
+            () -> new ItemStack(ModItems.PULVERIZER)
     );
-
+    public static final ItemGroup ARMOR_GROUP = FabricItemGroupBuilder.build(
+            new Identifier(MODID, "armor"),
+            () -> new ItemStack(ModItems.ICE_BOOTS)
+    );
     @Override
     public void onInitialize() {
 
