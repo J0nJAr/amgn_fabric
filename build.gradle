@@ -83,6 +83,6 @@ publishing {
         // mavenLocal()
     }
 }
-minecraft {
+loom {
     accessWidener "src/main/resources/amgn.accesswidener"
 }

@@ -1,6 +1,7 @@
 package jonjar.amgn.registry;
 
 import jonjar.amgn.Amgn;
+import jonjar.amgn.element.item.AntiSlipperyArmor;
 import jonjar.amgn.element.item.BladeItem;
 import jonjar.amgn.registry.etc.ModFoodComponents;
 import net.minecraft.entity.EquipmentSlot;
@@ -40,7 +41,7 @@ public class ModItems extends BaseRegistry {
     public void register(){
         CHOCOLATE_INGOT=Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"chocolate_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
         SLIME_INGOT= Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"slime_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP)));
-        WOOL_BOOTS = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"wool_boots"), new ArmorItem(ArmorMaterials.NETHERITE, EquipmentSlot.FEET, (new Item.Settings()).group(ItemGroup.COMBAT).fireproof()));
+        WOOL_BOOTS = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"wool_boots"), new AntiSlipperyArmor(ArmorMaterials.NETHERITE, EquipmentSlot.FEET, (new Item.Settings()).group(ItemGroup.COMBAT).fireproof()));
 
         RICECAKE_INGOT = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"ricecake_ingot"), new Item(new Item.Settings().group(Amgn.ITEM_GROUP).food(ModFoodComponents.RICECAKE)));
         COMPRESSED_RICECAKE_BLOCK = Registry.register(Registry.ITEM,new Identifier(Amgn.MODID,"compressed_ricecake_block"), new BlockItem(ModBlocks.COMPRESSED_RICECAKE_BLOCK, new Item.Settings().group(Amgn.ITEM_GROUP)));

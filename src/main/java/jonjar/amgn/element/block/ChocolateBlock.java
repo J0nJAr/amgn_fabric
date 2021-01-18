@@ -32,7 +32,7 @@ public class ChocolateBlock extends Block {
     public static final BooleanProperty SLIMELY = BooleanProperty.of("slimely");
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos)) {
+        if (world.getLightLevel(LightType.BLOCK, pos) > 12) {
             this.melt(state, world, pos);
         }
 
