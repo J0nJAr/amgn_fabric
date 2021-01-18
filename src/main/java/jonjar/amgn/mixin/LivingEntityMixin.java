@@ -2,6 +2,7 @@ package jonjar.amgn.mixin;
 
 import jonjar.amgn.Amgn;
 import jonjar.amgn.element.item.AntiSlipperyArmor;
+import jonjar.amgn.element.item.SlipperyArmor;
 import jonjar.amgn.entity.PlayerEntityExt;
 import jonjar.amgn.entity.ResizedEntity;
 import jonjar.amgn.registry.ModStatusEffects;
@@ -75,6 +76,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
 
     @Shadow public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
+
+    @Shadow public abstract void equipStack(EquipmentSlot slot, ItemStack stack);
 
     @Unique
     private static final UUID SCALED_SPEED_ID = UUID.fromString("c5267238-6a78-4257-ae83-a2a5e34c1128");
@@ -179,7 +182,6 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getSlipperiness()F"))
     public float antiSlippery(Block block) {
-
         float t = block.getSlipperiness();
 
         if((Object)this instanceof PlayerEntity){
@@ -188,7 +190,11 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
                 if(is.getItem() instanceof AntiSlipperyArmor) {
                     t=0.6f;
                     break;
+                }else if(is.getItem() instanceof SlipperyArmor) {
+                    t=1.3f;
+                    break;
                 }
+
             }
         }
         return t;
