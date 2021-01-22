@@ -14,7 +14,7 @@ public class GameOptionsMixin {
 
     @Inject(method = "load", at=@At("TAIL"))
     public void load(CallbackInfo ci){
-        fov = 270D;
+        fov = 70D;
     }
 
 }
