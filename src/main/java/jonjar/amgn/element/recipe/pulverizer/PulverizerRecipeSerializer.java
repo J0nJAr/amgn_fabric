@@ -32,7 +32,7 @@ public class PulverizerRecipeSerializer<T extends AbstractPulverizerRecipe> impl
         Identifier identifier2 = new Identifier(string2);
         ItemStack itemStack = new ItemStack((ItemConvertible)Registry.ITEM.getOrEmpty(identifier2).orElseThrow(() -> {
             return new IllegalStateException("Item: " + string2 + " does not exist");
-        }));
+        }),JsonHelper.getInt(jsonObject, "output_count", 1));
         float f = JsonHelper.getFloat(jsonObject, "experience", 0.0F);
         int i = JsonHelper.getInt(jsonObject, "pulverizetime", this.pulverizeTime);
         int l = JsonHelper.getInt(jsonObject, "level", this.level);

@@ -1,0 +1,11 @@
+{
+  "type": "amgn:pulverize",
+  "ingredient": {
+    "tag": "minecraft:wool"
+  },
+  "result": "minecraft:string",
+  "output_count": 4,
+  "pulverizetime": 200,
+  "experience": 0.2,
+  "level" : 0
+}

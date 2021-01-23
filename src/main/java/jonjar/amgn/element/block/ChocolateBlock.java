@@ -64,6 +64,7 @@ public class ChocolateBlock extends Block {
 
     }
 
+
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.NORMAL;
     }

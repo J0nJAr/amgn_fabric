@@ -302,7 +302,7 @@ public abstract class AbstractPulverizerBlockEntity extends LockableContainerBlo
             if (itemStack3.isEmpty()) {
                 this.inventory.set(2, itemStack2.copy());
             } else if (itemStack3.getItem() == itemStack2.getItem()) {
-                itemStack3.increment(1);
+                itemStack3.increment(itemStack2.getCount());
             }
 
             if (!this.world.isClient) {

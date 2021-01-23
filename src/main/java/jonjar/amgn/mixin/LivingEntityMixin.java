@@ -102,9 +102,9 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
             // 계산식 : 2^value
             if(value > 0)
-                return (float) 2F + value;
+                return (float) 1F + value;
             else
-                return (float) Math.pow(2F, value);
+                return (float) 1F + (value * 0.1F);
         } else {
             return 1F; // 기본 사이즈 = 1F
         }
@@ -114,6 +114,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     @Override
     public EntityDimensions scaleDimensions(EntityDimensions dimensions){
         float scale = getScale();
+        if(scale < 0.1F)
+            scale = 0.1F;
         return new EntityDimensions(dimensions.width * scale, dimensions.height * scale, dimensions.fixed);
     }
 
@@ -124,15 +126,12 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     }
 
 
-
-
     // 잘 때는 제외?
     @Inject(at = @At("RETURN"), method="getEyeHeight", cancellable = true)
     public void getEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> info){
         if(pose != EntityPose.SLEEPING){
-
             float scale = getScale();
-            if(scale < 0.1F) scale = 0.1F;
+            if(scale < 0.2F) scale = 0.2F;
             info.setReturnValue(info.getReturnValue() * getScale());
         }
     }
@@ -145,8 +144,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo info){
+        float scale = computeScale();
         if(!this.getEntityWorld().isClient()){
-            float scale = computeScale();
             if(this.getDataTracker().get(SCALE) != scale){
                 this.getDataTracker().set(SCALE, computeScale());
             }
@@ -160,6 +159,9 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
         ea.addPersistentModifier(new EntityAttributeModifier(SCALED_SPEED_ID,
                 "Resized speed multiplier",
                 Math.pow(getScale(), 0.4) - 1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+
+        if(scale / 2F != this.stepHeight)
+            this.stepHeight = scale/ 2F;
     }
 
     // TODO : DataTracker = 서버 종료 후에도 저장되는 값?
