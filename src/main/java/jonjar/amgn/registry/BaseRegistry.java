@@ -16,6 +16,8 @@ public abstract class BaseRegistry {
         FEATURE(new ModFeatures()),
         SCREEN(new ModScreen()),
         STATUS_EFFECT(new ModStatusEffects()),
+        ATTRIBUTES(new ModAttributes()),
+        PACKET(new ModPacket()),
         DYNAMIC_RECIPE(new ModDynamicRecipes());
 
         private final BaseRegistry br;

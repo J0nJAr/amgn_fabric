@@ -4,16 +4,25 @@
   "package": "jonjar.amgn.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChestBlockEntityMixin",
+    "EnderChestBlockEntityMixin",
     "EntityMixin",
+    "ForgingScreenHandlerMixin",
     "GameOptionsMixin",
+    "InventoryValidationMixin",
+    "ItemMixin",
     "LivingEntityMixin",
     "OptionScreenMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ScreenHandlerMixin",
+    "ServerPlayerNetworkHandlerMixin",
+    "ServerPlayerInteractionManagerMixin"
   ],
   "client": [
     "CameraMixin",
     "ClientPlayerInteractionManagerMixin",
     "EntityRenderDispatcherMixin",
+    "GameRendererMixin",
     "InventoryScreenMixin",
     "LivingEntityRendererMixin"
   ],

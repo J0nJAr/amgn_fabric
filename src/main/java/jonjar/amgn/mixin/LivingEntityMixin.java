@@ -5,13 +5,11 @@ import jonjar.amgn.element.item.AntiSlipperyArmor;
 import jonjar.amgn.element.item.SlipperyArmor;
 import jonjar.amgn.entity.PlayerEntityExt;
 import jonjar.amgn.entity.ResizedEntity;
+import jonjar.amgn.registry.ModAttributes;
 import jonjar.amgn.registry.ModStatusEffects;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -46,6 +44,16 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
         super(type, world);
     }
 
+    @Inject(
+            method = "createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
+            require = 1, allow = 1, at = @At("RETURN"))
+    private static void addAttributes(final CallbackInfoReturnable<DefaultAttributeContainer.Builder> info) {
+        final DefaultAttributeContainer.Builder builder = info.getReturnValue();
+        builder.add(ModAttributes.REACH);
+        builder.add(ModAttributes.ATTACK_RANGE);
+    }
+
+
     @Inject(method = "onDeath", at = @At(("HEAD")))
     public void onDeath(DamageSource source, CallbackInfo ci){
         Entity attacker = source.getAttacker();
@@ -65,8 +73,13 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
     @Inject(method="computeFallDamage(FF)I", at = @At("HEAD"), cancellable=true)
     public void computeFallDamage(float distance, float damageMultiplier, CallbackInfoReturnable<Integer> info){
+        float size = ((ResizedEntity) this).getScale();
+        if(size > 1.0F){
+            info.setReturnValue((int) (distance - size*4));
+        }
         if(Amgn.TOGGLED_GRAVITY)
             info.setReturnValue(100);
+
     }
 
 
@@ -79,8 +92,16 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
 
     @Shadow public abstract void equipStack(EquipmentSlot slot, ItemStack stack);
 
+    @Shadow public abstract void sendPickup(Entity item, int count);
+
     @Unique
     private static final UUID SCALED_SPEED_ID = UUID.fromString("c5267238-6a78-4257-ae83-a2a5e34c1128");
+
+    @Unique
+    private static final UUID REACH_ID = UUID.fromString("fe4cea66-7169-11eb-9439-0242ac130002");
+
+    @Unique
+    private static final UUID ATTACK_RANGE_ID = UUID.fromString("12fa50c0-716a-11eb-9439-0242ac130002");
 
     @Unique
     private static final TrackedData<Float> SCALE = DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -104,7 +125,7 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
             if(value > 0)
                 return (float) 1F + value;
             else
-                return (float) 1F + (value * 0.1F);
+                return (float) 1F + (value * 0.05F);
         } else {
             return 1F; // 기본 사이즈 = 1F
         }
@@ -114,8 +135,8 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     @Override
     public EntityDimensions scaleDimensions(EntityDimensions dimensions){
         float scale = getScale();
-        if(scale < 0.1F)
-            scale = 0.1F;
+        if(scale < 0.2F)
+            scale = 0.2F;
         return new EntityDimensions(dimensions.width * scale, dimensions.height * scale, dimensions.fixed);
     }
 
@@ -139,7 +160,10 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
     // 점프 높이 수정
     @Inject(at = @At("RETURN"), method = "getJumpVelocity", cancellable = true)
     public void getJumpVelocity(CallbackInfoReturnable<Float> info){
-        info.setReturnValue(info.getReturnValue() * (float) Math.pow(getScale(), 0.4F));
+        float f = 0.42F * this.getJumpVelocityMultiplier();
+        float n = info.getReturnValue() * (float) Math.pow(getScale(), 0.4F);
+        if(n < f) n = f;
+        info.setReturnValue(n);
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -160,8 +184,25 @@ public abstract class LivingEntityMixin extends Entity implements ResizedEntity 
                 "Resized speed multiplier",
                 Math.pow(getScale(), 0.4) - 1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
 
+
         if(scale / 2F != this.stepHeight)
             this.stepHeight = scale/ 2F;
+
+        if(scale > 3F){
+            for(Entity el : world.getOtherEntities((Entity) this, getBoundingBox())){
+                if(el instanceof LivingEntity){
+
+                    if(el.getHeight() * 4 < scale){
+                        el.damage(DamageSource.mob((LivingEntity) ((Entity) this)), scale * 2);
+                    }
+
+                } else if(el instanceof ItemEntity && (((Entity) this) instanceof PlayerEntity)){
+                    ItemEntity ie = (ItemEntity) el;
+                    ie.onPlayerCollision(((PlayerEntity) ((Entity) this)));
+
+                }
+            }
+        }
     }
 
     // TODO : DataTracker = 서버 종료 후에도 저장되는 값?
