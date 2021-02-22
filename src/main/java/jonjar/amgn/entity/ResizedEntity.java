@@ -6,5 +6,6 @@ public interface ResizedEntity {
 
     float getScale();
 
+
     EntityDimensions scaleDimensions(EntityDimensions dimensions);
 }

@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEntityExt {
 
     private int killCount = 0;
+    private boolean isExcavating = false;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world){
         super(type, world);
@@ -28,6 +29,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     public void addKills(int amount){
         killCount += amount;
         System.out.println("kills : " + killCount);
+    }
+
+    @Override
+    public boolean isExcavating() {
+        return isExcavating;
+    }
+
+    @Override
+    public void setExcavating(boolean isExcavating) {
+        this.isExcavating = isExcavating;
     }
 
     // Resize 관련 구문

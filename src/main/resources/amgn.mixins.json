@@ -12,11 +12,13 @@
     "InventoryValidationMixin",
     "ItemMixin",
     "LivingEntityMixin",
+    "MixinBlock",
+    "MixinCancelDurability",
     "OptionScreenMixin",
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
-    "ServerPlayerNetworkHandlerMixin",
-    "ServerPlayerInteractionManagerMixin"
+    "ServerPlayerInteractionManagerMixin",
+    "ServerPlayerNetworkHandlerMixin"
   ],
   "client": [
     "CameraMixin",
